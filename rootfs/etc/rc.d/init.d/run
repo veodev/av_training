@@ -1,0 +1,95 @@
+#!/bin/sh
+export MAIL=/var/mail/root
+export USER=root
+export HOME=/root
+export LOGNAME=root
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+export SHELL=/bin/sh
+export TMPDIR=/tmp
+
+cd $HOME
+
+runFile=/etc/run
+if [ -e ${runFile} ] ; then
+    content=`cat ${runFile}`
+    rm ${runFile}
+    case $content in
+        "service")
+            /usr/local/avicon-31/setup-utils/setup.sh
+            ;;
+        "update")
+            ;;
+        "run")
+            dialog --title "" --clear \
+                --timeout 10 \
+                --msgbox "Sysytem was finished not clean, go to service mode?" 5 55
+
+            retval=$?
+
+            if [ $retval -eq 0 ] ; then
+                echo "service" > /etc/run
+                # reboot
+            fi
+            ;;
+        *)
+            ;;
+    esac
+
+    reboot
+else
+    rm /root/.config/Radioavionica/avicon-31.conf.*
+    export TSLIB_TSDEVICE=/dev/input/ts0
+    export TSLIB_CALIBFILE=/etc/pointercal
+    export TSLIB_CONFILE=/usr/etc/ts.conf
+    export TSLIB_PLUGINDIR=/usr/lib/ts
+    export TSLIB_FBDEVICE=/dev/fb0
+    export TSLIB_CONSOLEDEVICE=none
+    export QT_GSTREAMER_VIDEOSINK=fbdevsink
+    while true ; do
+        echo "run" > /etc/run
+        if [ -e /usr/local/avicon-31/avicon31 ] ; then
+            /usr/local/avicon-31/avicon31 -platform linuxfb:virtual=-100x0x100x480:virtual=640x0x100x480:virtual=-100x480x840x100 -plugin Tslib:/dev/input/ts0 -plugin EvdevKeyboard -plugin EvdevMouse
+        else
+            echo "service" > /etc/run
+        fi
+
+        if [ -e ${runFile} ] ; then
+            content=`cat ${runFile}`
+            case $content in
+                "poweroff")
+                    rm ${runFile}
+                    poweroff
+                    while true ; do
+                        sleep 1
+                    done
+                    ;;
+                "reboot")
+                    rm ${runFile}
+                    reboot
+                    while true ; do
+                        sleep 1
+                    done
+                    ;;
+                "service")
+                    reboot
+                    while true ; do
+                        sleep 1
+                    done
+                    ;;
+                "update")
+                    reboot
+                    while true ; do
+                        sleep 1
+                    done
+                    ;;
+                "run")
+                    rm ${runFile}
+                    sleep 1
+                    ;;
+                *)
+                    ;;
+            esac
+        fi
+    done
+fi
+sleep 1

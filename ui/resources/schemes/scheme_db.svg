@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="600"
+   height="400"
+   id="svg4739"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="scheme_db.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     id="namedview3832"
+     showgrid="false"
+     inkscape:zoom="1.4389623"
+     inkscape:cx="432.67571"
+     inkscape:cy="297.15323"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4739"
+     inkscape:snap-bbox="true" />
+  <defs
+     id="defs4741">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect6201"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect6197"
+       is_visible="true" />
+    <linearGradient
+       id="linearGradient4623"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4625" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata4744">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,5.3735141,-184.87052)"
+     id="shape65-1"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title11">Sheet.65</title>
+    <path
+       d="M 146.71,546.88 0,594.39 a 4.81182,4.81182 -180 0 0 2.53,0.89 l 409.08,0 16.09,0 144.64,-46.84 a 1.60879,1.60879 -180 0 0 1.22,-1.56 l -426.85,0 z"
+       id="path13"
+       style="fill:#bfbfbf;stroke:#000000;stroke-width:0.72000003;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,105.81313,-423.54976)"
+     id="shape64-3"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title16">Sheet.64</title>
+    <path
+       d="m 0,549.82 a 13.2863,13.2863 0 0 1 13.2,12.61 l 0.98,19.25 a 20.7327,20.7327 0 0 1 -4.29,13.6 l 329.68,-0.08 94.67,-0.02 a 20.701,20.701 -180 0 0 3.98,-13.2 l -0.98,-19.25 A 13.3423,13.3423 -180 0 0 422.96,550.13 10778.2,10778.2 0 0 1 0,549.82 z"
+       id="path18"
+       style="fill:#bfbfbf;stroke:none" />
+  </g>
+  <g
+     transform="matrix(-0.98860111,0.28564773,0.30080103,0.93879872,-73.246784,-442.8577)"
+     id="shape7-5"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title21">Sheet.7</title>
+    <path
+       d="m 0,595.28 a 191.782,75.9271 0 0 1 48.98,0"
+       id="path23"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.52604151,0.84462784,0.88943447,0.49954137,-472.06853,-167.38671)"
+     id="shape8-8"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title26">Sheet.8</title>
+    <path
+       d="m 0,595.28 a 23.9942,22.9614 0 0 1 26.62,0"
+       id="path28"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.03606342,0.98069624,1.032721,-0.03424667,-571.36626,172.84731)"
+     id="shape9-11"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title31">Sheet.9</title>
+    <path
+       d="m 0,595.28 21.02,0"
+       id="path33"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.63852511,-0.77153562,-0.81246479,0.60635846,534.02119,-177.35755)"
+     id="shape10-14"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title36">Sheet.10</title>
+    <path
+       d="m 0,593.4 a 9.63566,8.381 -180 0 0 12.15,0"
+       id="path38"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.76381006,0.66093218,0.69599395,-0.72533198,-355.79075,612.90661)"
+     id="shape11-17"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title41">Sheet.11</title>
+    <path
+       d="m 0,592.73 a 15.1035,17.8797 -180 0 0 15.54,0"
+       id="path43"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.0213091,0.98108525,1.0331308,0.0202356,-545.04684,181.23444)"
+     id="shape12-20"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title46">Sheet.12</title>
+    <path
+       d="m 0,593.98 a 791.428,320.108 -180 0 0 142.13,0"
+       id="path48"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-1.0266056,-0.11193609,-0.11787418,0.97488878,126.91105,-397.34528)"
+     id="shape13-23"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title51">Sheet.13</title>
+    <path
+       d="m 0,595.28 4.71,0"
+       id="path53"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.58587423,0.80833249,0.85121366,0.55635994,-439.10051,2.8273414)"
+     id="shape14-26"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title56">Sheet.14</title>
+    <path
+       d="m 0,592.9 a 34.2574,33.6069 -180 0 0 25.29,0"
+       id="path58"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.86853541,0.53167,0.55987452,0.82478168,-282.51276,-137.83289)"
+     id="shape15-29"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title61">Sheet.15</title>
+    <path
+       d="m 0,595.28 49.26,0"
+       id="path63"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.57206376,0.81720406,0.8605559,0.54324518,-504.2853,55.948722)"
+     id="shape16-32"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title66">Sheet.16</title>
+    <path
+       d="m 0,595.28 a 6.30186,4.4259 0 0 1 8.62,0"
+       id="path68"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.03606342,0.98069624,1.032721,-0.03424667,-611.70312,406.76031)"
+     id="shape17-35"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title71">Sheet.17</title>
+    <path
+       d="m 0,595.28 9.81,0"
+       id="path73"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.82558942,-0.59015521,-0.62146231,0.78399913,377.41898,-66.786121)"
+     id="shape24-38"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title76">Sheet.24</title>
+    <path
+       d="m 0,594.46 a 3.92285,2.78496 -180 0 0 5.55,0"
+       id="path78"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(1.0320273,-0.04964655,0.05228024,0.98003732,414.08124,-184.01365)"
+     id="group25-41"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title81">Sheet.25</title>
+    <g
+       transform="matrix(-0.02691845,0.99963763,0.99963763,0.02691845,-500.401,371.598)"
+       id="shape38-42">
+      <title
+         id="title84">Sheet.38</title>
+      <path
+         d="m 0,595.28 a 667.649,284.173 0 0 1 133.2,0"
+         id="path86"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.39730005,0.91768876,0.91768876,0.39730005,-443.731,132.9)"
+       id="shape39-45">
+      <title
+         id="title89">Sheet.39</title>
+      <path
+         d="m 0,595.28 a 19.2952,11.1242 0 0 1 19.85,0"
+         id="path91"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0.81209167,-0.58352987,-0.58352987,-0.81209167,449.908,852.821)"
+       id="shape40-48">
+      <title
+         id="title94">Sheet.40</title>
+      <path
+         d="m 0,595.28 15.01,0"
+         id="path96"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.43958491,0.89820104,0.89820104,0.43958491,-410.204,83.7547)"
+       id="shape41-51">
+      <title
+         id="title99">Sheet.41</title>
+      <path
+         d="m 0,593.22 a 14.7354,9.94521 -180 0 0 17.94,0"
+         id="path101"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0,-1,-1,0,717.902,344.525)"
+       id="shape42-54">
+      <title
+         id="title104">Sheet.42</title>
+      <path
+         d="m 0,595.28 19.27,0"
+         id="path106"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.71520253,-0.69891726,-0.69891726,0.71520253,538.674,-100.49)"
+       id="shape43-57">
+      <title
+         id="title109">Sheet.43</title>
+      <path
+         d="m 0,595.28 a 13.1212,12.8056 0 0 1 19.05,0"
+         id="path111"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.96627098,0.25752745,0.25752745,0.96627098,-44.2989,-263.259)"
+       id="shape44-60">
+      <title
+         id="title114">Sheet.44</title>
+      <path
+         d="m 0,595.28 a 191.782,75.9271 0 0 1 48.98,0"
+         id="path116"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.53879284,0.84243829,0.84243829,0.53879284,-439.811,3.82218)"
+       id="shape45-63">
+      <title
+         id="title119">Sheet.45</title>
+      <path
+         d="m 0,595.28 a 23.9942,22.9614 0 0 1 26.62,0"
+         id="path121"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0,1,1,0,-547.946,346.977)"
+       id="shape46-66">
+      <title
+         id="title124">Sheet.46</title>
+      <path
+         d="m 0,595.28 21.02,0"
+         id="path126"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.59010134,-0.80732918,-0.80732918,0.59010134,533.569,27.6464)"
+       id="shape47-69">
+      <title
+         id="title129">Sheet.47</title>
+      <path
+         d="m 0,593.4 a 9.63566,8.381 -180 0 0 12.15,0"
+         id="path131"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0.71520253,0.69891726,0.69891726,-0.71520253,-355.106,802.433)"
+       id="shape48-72">
+      <title
+         id="title134">Sheet.48</title>
+      <path
+         d="m 0,592.73 a 15.1035,17.8797 -180 0 0 15.54,0"
+         id="path136"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.05550086,0.99845864,0.99845864,0.05550086,-522.79,356.408)"
+       id="shape49-75">
+      <title
+         id="title139">Sheet.49</title>
+      <path
+         d="m 0,593.98 a 791.428,320.108 -180 0 0 142.13,0"
+         id="path141"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.98888655,-0.14867209,-0.14867209,0.98888655,147.663,-210.147)"
+       id="shape50-78">
+      <title
+         id="title144">Sheet.50</title>
+      <path
+         d="m 0,595.28 4.71,0"
+         id="path146"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.59536841,0.80345283,0.80345283,0.59536841,-413.98,178.289)"
+       id="shape51-81">
+      <title
+         id="title149">Sheet.51</title>
+      <path
+         d="m 0,592.9 a 34.2574,33.6069 -180 0 0 25.29,0"
+         id="path151"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.85890091,0.51214181,0.51214181,0.85890091,-257.536,40.323)"
+       id="shape52-84">
+      <title
+         id="title154">Sheet.52</title>
+      <path
+         d="m 0,595.28 49.26,0"
+         id="path156"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.58232731,0.81295443,0.81295443,0.58232731,-478.912,230.188)"
+       id="shape53-87">
+      <title
+         id="title159">Sheet.53</title>
+      <path
+         d="m 0,595.28 a 6.30186,4.4259 0 0 1 8.62,0"
+         id="path161"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0,1,1,0,-595.276,583.842)"
+       id="shape54-90">
+      <title
+         id="title164">Sheet.54</title>
+      <path
+         d="m 0,595.28 9.81,0"
+         id="path166"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.71520253,-0.69891726,-0.69891726,0.71520253,520.649,114.182)"
+       id="shape55-93">
+      <title
+         id="title169">Sheet.55</title>
+      <path
+         d="m 0,591.03 a 19.1348,21.0134 -180 0 0 23.06,0"
+         id="path171"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.99841451,-0.05628921,-0.05628921,0.99841451,178.364,-55.34)"
+       id="shape56-96">
+      <title
+         id="title174">Sheet.56</title>
+      <path
+         d="m 0,595.28 37.35,0"
+         id="path176"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.71520253,-0.69891726,-0.69891726,0.71520253,566.283,118.505)"
+       id="shape57-99">
+      <title
+         id="title179">Sheet.57</title>
+      <path
+         d="m 0,595.28 a 4.51897,2.59216 0 0 1 7.52,0"
+         id="path181"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(0,1,1,0,-445.041,544.248)"
+       id="shape58-102">
+      <title
+         id="title184">Sheet.58</title>
+      <path
+         d="m 0,595.28 9.46,0"
+         id="path186"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.53879284,0.84243829,0.84243829,0.53879284,-350.924,233.185)"
+       id="shape59-105">
+      <title
+         id="title189">Sheet.59</title>
+      <path
+         d="m 0,594.89 a 1.38139,0.673184 -180 0 0 2.49555,0"
+         id="path191"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.96573131,0.25954389,0.25954389,0.96573131,-5.60941,-19.0658)"
+       id="shape60-108">
+      <title
+         id="title194">Sheet.60</title>
+      <path
+         d="m 0,595.28 152.03,0"
+         id="path196"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       transform="matrix(-0.89848166,-0.43901106,-0.43901106,0.89848166,263.843,60.9431)"
+       id="shape61-111">
+      <title
+         id="title199">Sheet.61</title>
+      <path
+         d="m 0,594.46 a 2.25747,2.78496 -180 0 0 3.19,0"
+         id="path201"
+         style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,7.9847838,-184.87052)"
+     id="shape26-114"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title204">Sheet.26</title>
+    <path
+       d="m 0,595.28 425.17,0"
+       id="path206"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,63.741287,-398.44238)"
+     id="shape1-117"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title209">Sheet.1</title>
+    <path
+       d="m 0,595.28 421.74,0"
+       id="path211"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(1.0333503,5.0810448e-4,-5.3505889e-4,0.98129382,104.08744,-467.96117)"
+     id="shape3-120"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title214">Sheet.3</title>
+    <path
+       d="m 0,595.28 424.4,0"
+       id="path216"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.52392882,0.84581119,0.89068061,-0.49753511,-225.04716,424.26396)"
+     id="F45E"
+     style="font-size:12px;fill:none;stroke:#ff0000;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 287.62,0"
+       id="path226"
+       style="stroke:#ff0000;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <path
+     d="m 291.97635,128.09374 0,243.27259"
+     id="N0EMS"
+     style="font-size:12px;fill:none;stroke:#000000;stroke-width:2.1750896;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;overflow:visible" />
+  <g
+     transform="matrix(0.96755652,-0.34455457,0.36283282,0.91881441,-67.544618,-366.00346)"
+     id="B65EW"
+     style="font-size:12px;fill:none;stroke:#0000ff;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 121.1,0"
+       id="path236"
+       style="stroke:#0000ff;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.96833448,-0.34257811,0.36075152,0.91955312,-54.58876,-389.19829)"
+     id="B65EU"
+     style="font-size:12px;fill:none;stroke:#0000ff;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 121,0"
+       id="path241"
+       style="stroke:#0000ff;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.96833448,-0.34257811,0.36075152,0.91955312,-60.447137,-377.84278)"
+     id="B65E"
+     style="font-size:12px;fill:none;stroke:#0000ff;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 121,0"
+       id="path246"
+       style="stroke:#0000ff;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <path
+     d="M 435.50014,180.94838 318.32905,139.22282"
+     id="F65EW"
+     style="font-size:12px;fill:#ff0000;stroke:#ff0000;stroke-width:2.1750896;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3" />
+  <g
+     transform="matrix(-0.96833448,-0.34257811,-0.36075152,0.91955312,661.96437,-389.19829)"
+     id="F65EU"
+     style="font-size:12px;fill:none;stroke:#ff0000;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 121,0"
+       id="path256"
+       style="stroke:#ff0000;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.96833448,-0.34257811,-0.36075152,0.91955312,656.10632,-377.84278)"
+     id="F65E"
+     style="font-size:12px;fill:none;stroke:#ff0000;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 121,0"
+       id="path261"
+       style="stroke:#ff0000;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.28387635,0.94353947,-0.99359328,-0.26957565,876.10869,295.69384)"
+     id="N55MSLW"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible"
+     inkscape:label="#N55MSW">
+    <path
+       d="m 0,595.28 46.43,0"
+       id="path266"
+       style="stroke:#00b050;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.30389327,0.93790025,-0.98765492,0.28858419,882.82748,-52.038942)"
+     id="N55MSLU"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible"
+     inkscape:label="#N55MSU">
+    <path
+       d="m 0,595.28 38.56,0"
+       id="path271"
+       style="stroke:#00b050;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.58688204,0.21528879,0.22670963,0.557317,181.91093,-326.15838)"
+     id="shape33-156"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title274">Sheet.33</title>
+    <path
+       d="m 0,595.28 a 316.581,75.9271 0 0 1 80.86,0"
+       id="path276"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.58415992,0.22186461,0.23363429,0.55473202,212.10566,-207.17778)"
+     id="shape34-159"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title279">Sheet.34</title>
+    <path
+       d="m 0,595.28 a 238.796,75.9271 0 0 1 60.99,0"
+       id="path281"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.62914846,0,0,0.59745417,267.91679,-229.85953)"
+     id="shape32-162"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title284">Sheet.32</title>
+    <ellipse
+       cx="102.047"
+       cy="493.228"
+       rx="102.047"
+       ry="102.047"
+       id="ellipse286"
+       style="fill:#ffff00;fill-opacity:0.3;stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(0.62914846,0,0,0.59745417,224.75846,-213.6016)"
+     id="N0EMSProbe"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <ellipse
+       cx="102.047"
+       cy="493.228"
+       rx="102.047"
+       ry="102.047"
+       id="ellipse291"
+       style="fill:#ffff00;fill-opacity:0.3;stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.16822466,0.57570079,-0.60624104,0.1597501,677.74592,-89.496565)"
+     id="shape35-166"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title294">Sheet.35</title>
+    <path
+       d="m 0,595.28 a 102.047,102.047 0 0 1 204,0"
+       id="path296"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(0.02448071,0.98101856,1.0330605,-0.02324747,-521.09997,204.71091)"
+     id="shape63-169"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title299">Sheet.63</title>
+    <path
+       d="m 0,595.28 a 667.649,284.173 0 0 1 133.2,0"
+       id="path301"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(-0.36204747,0.91909381,0.96785073,0.34380877,-475.09418,-32.037041)"
+     id="shape88-172"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title304">Sheet.88</title>
+    <path
+       d="m 0,595.28 a 19.2952,11.1242 0 0 1 19.85,0"
+       id="path306"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(0.80759359,-0.61219856,-0.64467504,-0.76690983,484.8027,629.14704)"
+     id="shape89-175"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title309">Sheet.89</title>
+    <path
+       d="m 0,595.28 15.01,0"
+       id="path311"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(-0.4067054,0.90209437,0.9499495,0.386217,-443.0634,-81.865081)"
+     id="shape90-178"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title314">Sheet.90</title>
+    <path
+       d="m 0,593.22 a 14.7354,9.94521 -180 0 0 17.94,0"
+       id="path316"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(-0.77464801,-0.64945762,-0.68391064,0.73562395,519.19364,-98.259067)"
+     id="shape93-181"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title319">Sheet.93</title>
+    <path
+       d="m 0,591.03 a 19.1348,21.0134 -180 0 0 23.06,0"
+       id="path321"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(-1.0333336,-0.00559768,-0.00589463,0.98127792,154.48394,-247.41732)"
+     id="shape94-184"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title324">Sheet.94</title>
+    <path
+       d="m 0,595.28 34.83,0"
+       id="path326"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(0.05228024,0.98003732,1.0320273,-0.04964655,-457.85686,372.06176)"
+     id="shape95-187"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title329">Sheet.95</title>
+    <path
+       d="m 0,595.28 9.46,0"
+       id="path331"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(-0.98309189,0.3023079,0.31834501,0.93356721,-32.524711,-203.95002)"
+     id="shape96-190"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title334">Sheet.96</title>
+    <path
+       d="m 0,595.28 154.21,0"
+       id="path336"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,156.97741,-232.36045)"
+     id="shape97-193"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title339">Sheet.97</title>
+    <path
+       d="m 0,595.28 426.85,0"
+       id="path341"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(1.0333505,-2.3134381e-4,2.4361634e-4,0.98129395,115.8914,-423.54976)"
+     id="shape36-196"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 424.34,0"
+       id="path346"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,87.432923,-210.9748)"
+     id="shape37-199"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title349">Sheet.37</title>
+    <path
+       d="m 0,595.28 430.44,0"
+       id="path351"
+       style="stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(0.6924163,0.72841324,0.76705478,-0.65753477,-304.62545,727.26363)"
+     id="shape62-202"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title354">Sheet.62</title>
+    <path
+       d="m 0,593.96 a 12.3022,24.4669 -180 0 0 7.96,0"
+       id="path356"
+       style="stroke:#808080;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.68, 1.2" />
+  </g>
+  <g
+     transform="matrix(1.0333505,0,0,0.98129395,45.185415,-441.321)"
+     id="shape27-205"
+     style="font-size:12px;fill:none;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <title
+       id="title359">Sheet.27</title>
+    <path
+       d="m 0,595.06 a 37.2135,37.2135 0 0 1 11.81,-12.87 l 44.88,-14.06 424.4,0.22 -46.09,14.88 a 21.1594,21.1594 -180 0 0 -10.6,12.05 L 0,595.06 z"
+       id="path361"
+       style="fill:#595959;fill-opacity:0.6;stroke:#000000;stroke-width:0.23999999;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.53738576,0.81076841,-0.80455858,-0.54153346,757.47088,452.66311)"
+     id="B45E"
+     style="font-size:12px;fill:none;stroke:#0000ff;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 0,595.28 297.73,0"
+       id="path221"
+       style="stroke:#0000ff;stroke-width:2.16000009;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+  <g
+     transform="matrix(-0.96833448,-0.34257811,-0.36075152,0.91955312,769.50563,-450.25684)"
+     id="F65E-0"
+     style="font-size:12px;fill:none;stroke:#ff0000;stroke-linecap:square;stroke-miterlimit:3;overflow:visible">
+    <path
+       d="m 32.906838,561.7185 90.683872,33.78414"
+       id="path261-5"
+       style="stroke:#000000;stroke-width:2.15991116;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 32.906838,561.7185 19.113333,17.99549"
+       id="path261-5-1"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:2.15991116;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3;stroke-opacity:1;stroke-dasharray:none;overflow:visible" />
+    <path
+       d="m 32.938533,561.65098 26.228608,-1.10341"
+       id="path261-5-1-6"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:2.15991116;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3;stroke-opacity:1;stroke-dasharray:none;overflow:visible" />
+  </g>
+  <flowRoot
+     style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="flowRoot6144"
+     xml:space="preserve"
+     transform="matrix(1.0402422,0,0,1.0562107,-23.411657,-10.087938)"><flowRegion
+       id="flowRegion6146"><rect
+         y="135.13513"
+         x="564.37347"
+         height="9.8280096"
+         width="28.378378"
+         id="rect6148" /></flowRegion><flowPara
+       id="flowPara6150" /></flowRoot>  <rect
+     y="150.91357"
+     x="11.035794"
+     height="21.472223"
+     width="40.391659"
+     id="rect6142-7"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text6152-5"
+     y="166.53087"
+     x="13.903152"
+     style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       style="font-size:15px"
+       y="166.53087"
+       x="13.903152"
+       id="tspan6154-3"
+       sodipodi:role="line">Gauge</tspan></text>
+  <path
+     sodipodi:nodetypes="ccccccc"
+     inkscape:connector-curvature="0"
+     inkscape:original-d="m 43.410167,150.97534 -32.049618,-0.24569 -0.06769,21.50205 32.705749,0.0432 0.391018,2.5e-4 0,0 -0.260609,0.0216"
+     inkscape:path-effect="#path-effect6197"
+     id="path6195"
+     d="m 43.410167,150.97534 -32.049618,-0.24569 -0.06769,21.50205 c 10.901905,0.0217 21.803825,0.0361 32.705749,0.0432 0.130339,8e-5 0.260679,1.7e-4 0.391018,2.5e-4 l 0,0 -0.260609,0.0216"
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4886"
+     width="39.959351"
+     height="48.472431"
+     x="559.08344"
+     y="116.11487" />
+  <g
+     id="g4888"
+     transform="translate(-6.0807709,-0.34747269)">
+    <rect
+       style="fill:#bfbfbf;fill-opacity:1;stroke:#bfbfbf;stroke-width:0.07548243;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6142"
+       width="40.144501"
+       height="21.716442"
+       x="554.92041"
+       y="128.73625" />
+  </g>
+  <path
+     sodipodi:nodetypes="cccccc"
+     inkscape:connector-curvature="0"
+     inkscape:original-d="m 557.50989,128.32491 31.66103,0.007 0,21.80391 -30.66446,0.0434 0.13031,0 0,0"
+     inkscape:path-effect="#path-effect6201"
+     id="path6199"
+     d="m 557.50989,128.32491 31.66103,0.007 0,21.80391 -30.66446,0.0434 0.13031,0 0,0"
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text6152"
+     y="144.39102"
+     x="551.99542"
+     style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       style="font-size:15px"
+       y="144.39102"
+       x="551.99542"
+       id="tspan6154"
+       sodipodi:role="line">Field</tspan></text>
+</svg>

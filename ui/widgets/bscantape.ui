@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BScanTape</class>
+ <widget class="QWidget" name="BScanTape">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>315</width>
+    <height>43</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>315</width>
+    <height>43</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="BScanGates" name="forwardGates" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>43</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>10</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="BScanPlot" name="bScanPlot" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>43</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>2000</width>
+       <height>2000</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="BScanGates" name="backwardGates" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>43</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>10</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BScanPlot</class>
+   <extends>QWidget</extends>
+   <header>bscanplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BScanGates</class>
+   <extends>QWidget</extends>
+   <header>bscangates.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

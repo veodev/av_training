@@ -1,0 +1,98 @@
+#!/bin/sh
+
+# rc.local, Local initialisation tasks
+
+echo U:640x480p-57 > /sys/class/graphics/fb0/mode
+
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here
+if [ -x "/usr/bin/rpm" -a -e "/tmp/ltib" ]
+then
+    echo "rebuilding rpm database"
+    rm -rf /tmp/ltib
+    rpm --rebuilddb
+fi
+
+# Add nodes when running under the hypervisor and static devices
+if [ -r /sys/class/misc/fsl-hv/dev -a ! -r /dev/fsl-hv ]
+then
+   echo "creating hypervisor nodes"
+   DEVID=`cat /sys/class/misc/fsl-hv/dev`
+   if [ -n "$DEVID" ]
+   then
+       MAJOR="${DEVID%:*}"
+       MINOR="${DEVID##*:}"
+
+       if [ \( "$MAJOR" -gt 0 \) -a \( "$MINOR" -gt 0 \) ]
+       then
+           rm -f /dev/fsl-hv
+           mknod /dev/fsl-hv c $MAJOR $MINOR
+       fi
+   fi
+   for i in 0 1 2 3 4 5 6 7
+   do
+       mknod /dev/hvc$i c 229 $i
+   done
+fi
+
+# add the fm device nodes
+if [ -n "$(cat /proc/devices | grep fm | sed 's/\([0-9]*\).*/\1/')" -a ! -r /dev/fm0 ]
+then
+    echo "creating fman device nodes"
+    cd /usr/share/doc/fmd-uspace-01.01/test/
+    sh fm_dev_create
+    cd -
+fi
+
+for i in 0 1 2; do
+    if [ -e /sys/class/graphics/fb$i ]; then
+        chmod 0666 /sys/class/graphics/fb$i/pan
+    fi
+done
+
+# setup ppp options file
+if [ ! -f /etc/ppp/options.orig -a -f  /etc/ppp/options ]
+then
+    mv /etc/ppp/options /etc/ppp/options.orig
+    ln -s options.pinpad_target /etc/ppp/options
+fi
+
+#prevent screen blanking
+echo -e "\033[9;0]" > /dev/tty0
+
+if [ $1 = "start" ]
+then
+    modprobe usbtouchscreen
+    export TSLIB_TSDEVICE=/dev/input/ts0
+    export TSLIB_CALIBFILE=/etc/pointercal
+    export TSLIB_CONFILE=/usr/etc/ts.conf
+    export TSLIB_PLUGINDIR=/usr/lib/ts
+    export TSLIB_FBDEVICE=/dev/fb0
+    export TSLIB_CONSOLEDEVICE=none
+
+    modprobe eim-tst
+    modprobe proc-gpio
+    if [ -f /proc/gpio/gpo-2 ]
+    then
+        echo 1 > /proc/gpio/gpo-2
+    fi
+
+    # UMU power on
+    if [ -f /proc/gpio/gpo-3 ]
+    then
+        echo 1 > /proc/gpio/gpo-3
+    fi
+
+    modprobe p54spi
+
+    modprobe wl1271_sdio
+    sleep 1
+#    iwconfig wlan0 mode ad-hoc
+#    iwconfig wlan0 channel 1
+#    iwconfig wlan0 key off
+    iwconfig wlan0 essid 'avicon31'
+    ifconfig wlan0 hw ether 02:01:02:03:04:05
+    ifconfig wlan0 192.168.101.1 netmask 255.255.255.0 up
+    ifconfig wlan0 up
+fi

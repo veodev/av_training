@@ -1,0 +1,16 @@
+message(STATUS "use arm-none-linux-gnueabi toolchain")
+
+set(SYSROOT_PATH          $ENV{SYSROOT})
+set(GCC_PREFIX            "arm-none-linux-gnueabi")
+set(CMAKE_SYSTEM_NAME     "arm-none-linux-gnueabi")
+set(CMAKE_C_COMPILER      "${GCC_PREFIX}-gcc")
+set(CMAKE_CXX_COMPILER    "${GCC_PREFIX}-g++")
+set(CMAKE_AR              "${GCC_PREFIX}-ar")
+set(CMAKE_C_FLAGS         "--sysroot=${SYSROOT_PATH}")
+set(CMAKE_CXX_FLAGS       "--sysroot=${SYSROOT_PATH} -O2 -Wall -W -D_REENTRANT -fPIE")
+set(CMAKE_FIND_ROOT_PATH  "${SYSROOT_PATH}")
+set(CMAKE_CXX_LINK_FLAGS  "--sysroot=${SYSROOT_PATH} -Wl,-O1 -Wl,-rpath,/usr/local/Qt-5.1.1-arm-none-linux-gnueabi/lib")
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)

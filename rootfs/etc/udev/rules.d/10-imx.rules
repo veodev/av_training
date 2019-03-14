@@ -1,0 +1,13 @@
+# Create symlinks for i.mx keypads and touchscreens
+SUBSYSTEM=="input" SYSFS{name}=="mxckpd",     SYMLINK+="input/keyboard0"
+SUBSYSTEM=="input" SYSFS{name}=="mxc_ts",     SYMLINK+="input/ts0"
+SUBSYSTEM=="input" KERNEL=="event*" SYSFS{name}=="imx_adc_ts", SYMLINK+="input/ts0"
+SUBSYSTEM=="input" SYSFS{name}=="MPR084",     SYMLINK+="input/keyboard0"
+SUBSYSTEM=="input" SYSFS{name}=="TSC2007",    SYMLINK+="input/ts0"
+
+SUBSYSTEM=="input" KERNEL=="event*" SYSFS{name}=="3M 3M USB Touchscreen - EX II", SYMLINK+="input/ts0"
+
+# The long class name gets cut off to be mc13783_connectiv in 
+# /sys/class/mc13783_connectivity/mc13783_connectivit
+KERNEL=="mc13783_connectiv*",  NAME="mc13783_connectivity"
+

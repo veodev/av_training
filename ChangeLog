@@ -1,0 +1,48 @@
+2014-08-18 Sergey Savchuk <ssavchuk@radioavionika.ru>
+	* (v0.0.20) model-view vision.
+
+2014-06-19 Sergey Savchuk <ssavchuk@radioavionika.ru>
+	+ (v0.0.19) added MScanPlot.
+
+2014-05-20 Sergey Savchuk <ssavchuk@radioavionika.ru>
+	+ (v0.0.18) added external keyboard support.
+
+2014-04-23 Sergey Savchuk <ssavchuk@radioavionika.ru>
+	+ (v0.0.17) added ControlsArea (with SpinBoxes)
+
+2014-04-18 Sergey Savchuk <ssavchuk@radioavionika.ru>
+	+ (v0.0.16) defcore submodule
+	+ (v0.0.15) aScanPlot
+
+2013-12-17 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.14) added geo position (NMEA from serial port)
+
+2013-12-10 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.13) added coontainer for virtual keyboards and virtual keyboards (english, russian and puctuation marks)
+
+2013-12-05 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.12) added switching of languages
+
+2013-12-04 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.11) added logger
+
+2013-12-02 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.10) added touchscreen calibrator
+	+ (v0.0.9) added versioning
+
+2013-11-29 Sergey Savchuk <ssavchuk@radioavionika.ru>
+
+	+ (v0.0.8) sound setting and test audio (created audio generator for set of combinations of 500 Hz blink, 500 Hz 1000 Hz 2000 Hz for left and right channels)
+	+ (v0.0.7) show battery charge level in status bar (created UTSVU power manager which use PMIC module)
+	+ (v0.0.6) show ambient temperature in status bar (created utsvu sensors plugin for qt with 1-wire ds18s20 temperature sensor)
+	+ (v0.0.5) set date (settings menu)
+	+ (v0.0.4) set time (settings menu)
+	+ (v0.0.3) show date and time in status bar
+	+ (v0.0.2) created patch for qt which allow use out of screen area of linuxfb for touch screen bigger than LCD screen
+	+ (v0.0.1) stack widgets based GUI
+

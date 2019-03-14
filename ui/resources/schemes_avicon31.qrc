@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="scheme1.svg">schemes/scheme1.svg</file>
+        <file alias="scheme2.svg">schemes/scheme2.svg</file>
+        <file alias="scheme3.svg">schemes/scheme3.svg</file>
+    </qresource>
+</RCC>

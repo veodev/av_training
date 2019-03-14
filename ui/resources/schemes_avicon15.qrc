@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="scheme1.svg">schemes/scheme_av15.svg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,72 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="logo">images/logo.png</file>
+        <file alias="arrow_up_black_33x22.png">images/arrow_up_black_33x22.png</file>
+        <file alias="arrow_down_black_33x22.png">images/arrow_down_black_33x22.png</file>
+        <file alias="arrow_left_black_22x33.png">images/arrow_left_black_22x33.png</file>
+        <file alias="arrow_right_black_22x33.png">images/arrow_right_black_22x33.png</file>
+        <file alias="arrow2_up_white_31x32.png">images/arrow2_up_white_31x32.png</file>
+        <file alias="arrow2_down_white_31x32.png">images/arrow2_down_white_31x32.png</file>
+        <file alias="arrow2_left_white_32x31.png">images/arrow2_left_white_32x31.png</file>
+        <file alias="arrow2_right_white_32x31.png">images/arrow2_right_white_32x31.png</file>
+        <file alias="arrow2_up_white_15x16.png">images/arrow2_up_white_15x16.png</file>
+        <file alias="arrow2_down_white_15x16.png">images/arrow2_down_white_15x16.png</file>
+        <file alias="arrow2_left_white_16x15.png">images/arrow2_left_white_16x15.png</file>
+        <file alias="arrow2_right_white_16x15.png">images/arrow2_right_white_16x15.png</file>
+        <file alias="backspace_white_28x16.png">images/backspace_white_28x16.png</file>
+        <file alias="enter_white_25x16.png">images/enter_white_25x16.png</file>
+        <file alias="shift_white_15x16.png">images/shift_white_15x16.png</file>
+        <file alias="reboot_black_32x32.png">images/reboot_black_32x32.png</file>
+        <file alias="power_off_black_30x32.png">images/power_off_black_30x32.png</file>
+        <file alias="media_next_black_32_19.png">images/media_next_black_32_19.png</file>
+        <file alias="media_pause_black_32x32.png">images/media_pause_black_32x32.png</file>
+        <file alias="media_play_black_27x32.png">images/media_play_black_27x32.png</file>
+        <file alias="media_previous_black_19x32.png">images/media_previous_black_19x32.png</file>
+        <file alias="media_stop_black_32x32.png">images/media_stop_black_32x32.png</file>
+        <file alias="sound_mute_11x8_black.png">images/sound_mute_11x8_black.png</file>
+        <file alias="sound_mute_11x8_red.png">images/sound_mute_11x8_red.png</file>
+        <file alias="sound_mute_11x8_white.png">images/sound_mute_11x8_white.png</file>
+        <file alias="photo_camera_black_32x26.png">images/photo_camera_black_32x26.png</file>
+        <file alias="video_camera_black_32x24.png">images/video_camera_black_32x24.png</file>
+        <file alias="record_black_18x32.png">images/record_black_18x32.png</file>
+        <file alias="record_red_18x32.png">images/record_red_18x32.png</file>
+        <file alias="bin_black_26x32.png">images/bin_black_26x32.png</file>
+        <file alias="please-stand-by">images/please-stand-by.png</file>
+        <file alias="editcopy">images/editcopy.png</file>
+        <file alias="editcut">images/editcut.png</file>
+        <file alias="editpaste">images/editpaste.png</file>
+        <file alias="scheme_not_found.svg">schemes/scheme_not_found.svg</file>
+        <file alias="volume_black_32x32.png">images/volume_black_32x32.png</file>
+        <file alias="brightness_contrast_black_32x32.png">images/brightness_contrast_black_32x32.png</file>
+        <file alias="tone_on.png">images/tone_on.png</file>
+        <file alias="tone_off.png">images/tone_off.png</file>
+        <file alias="only_tone_on.png">images/only_tone_on.png</file>
+        <file alias="only_tone_off.png">images/only_tone_off.png</file>
+        <file alias="drop.png">images/drop.png</file>
+        <file alias="wifi_25.png">images/wifi_25.png</file>
+        <file alias="wifi_50.png">images/wifi_50.png</file>
+        <file alias="wifi_75.png">images/wifi_75.png</file>
+        <file alias="wifi_100.png">images/wifi_100.png</file>
+        <file alias="wifi_off.png">images/wifi_off.png</file>
+        <file alias="bluetooth_off.png">images/bluetooth_off</file>
+        <file alias="bluetooth_on.png">images/bluetooth_on</file>
+        <file alias="not_good.png">images/not_good.png</file>
+        <file alias="good.png">images/good.png</file>
+        <file alias="boltJointLabel.png">images/boltJointLabel.png</file>
+        <file alias="coordinateLabel.png">images/coordinateLabel.png</file>
+        <file alias="markerLabel.png">images/markerLabel.png</file>
+        <file alias="remoteControl.png">images/remote_control.png</file>
+        <file>images/heater_16x16.png</file>
+        <file>images/switch.png</file>
+        <file>images/specialRailType.png</file>
+        <file>images/photo_camera_black_50x50.png</file>
+        <file>images/video_camera_black_50x50.png</file>
+        <file>images/zoom_in_black_50x50.png</file>
+        <file>images/zoom_out_black_50x50.png</file>
+        <file>images/photo_camera_black_100x100.png</file>
+        <file>images/video_camera_black_96x96.png</file>
+        <file>images/zoom_in_black_100x100.png</file>
+        <file>images/zoom_out_black_100x100.png</file>
+        <file>images/back_black_90x90.png</file>
+    </qresource>
+</RCC>

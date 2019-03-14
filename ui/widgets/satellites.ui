@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Satellites</class>
+ <widget class="QWidget" name="Satellites">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Visible satellites</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>GPS</string>
+      </attribute>
+      <widget class="QTableWidget" name="gpsTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>601</width>
+         <height>331</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>24</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="gridStyle">
+        <enum>Qt::NoPen</enum>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>130</number>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>58</number>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Id</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Strength</string>
+        </property>
+       </column>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>GLONAS</string>
+      </attribute>
+      <widget class="QTableWidget" name="glonasTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>601</width>
+         <height>331</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>130</number>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Id</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Strength</string>
+        </property>
+       </column>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
