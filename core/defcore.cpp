@@ -1038,7 +1038,7 @@ void Defcore::onSetUmuLineToCompleteControl()
     Q_ASSERT(thread() == QThread::currentThread());
     Q_ASSERT(_device != nullptr);
     _criticalSection->Enter();
-    Q_ASSERT(_isDeviceStarted);
+    //    Q_ASSERT(_isDeviceStarted);
     if (_isDeviceStarted) {
         _device->DisableAll();
         _device->ChangeDeviceConfig(_deviceConfig);

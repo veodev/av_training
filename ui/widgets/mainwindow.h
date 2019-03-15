@@ -198,6 +198,8 @@ private:
     void viewCurrentCoordinate();
     void showSplashScreen(QString message);
 
+    void connectBottomPanelSignals();
+
 private slots:
     void switchToPage(QWidget* widget);
     void switchToMenuPage(QWidget* widget);

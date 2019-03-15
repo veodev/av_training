@@ -68,5 +68,18 @@
         <file>images/zoom_in_black_100x100.png</file>
         <file>images/zoom_out_black_100x100.png</file>
         <file>images/back_black_90x90.png</file>
+        <file>images/forward_button.png</file>
+        <file>images/backward_button.png</file>
+        <file>images/logo_white.png</file>
+        <file>images/gost.png</file>
+        <file>images/back_button.png</file>
+        <file>images/main_menu.png</file>
+        <file>images/bolt_joint.png</file>
+        <file>images/marks_button.png</file>
+        <file>images/rail_type.png</file>
+        <file>images/hand.png</file>
+        <file>images/pause.png</file>
+        <file>images/search.png</file>
+        <file>images/options.png</file>
     </qresource>
 </RCC>

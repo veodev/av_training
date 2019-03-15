@@ -312,6 +312,8 @@ void MainWindow::init()
     ui = new Ui::MainWindow;
     emit progressChanged(27);
     ui->setupUi(this);
+    ui->bottomPanel->hide();
+    connectBottomPanelSignals();
     _testExternalKeyboard = new TestExternalKeyboardWidget();
     emit progressChanged(35);
     setupStackedWidget();
@@ -2771,6 +2773,19 @@ void MainWindow::showSplashScreen(QString message)
     _splashScreen->setMessage(message);
     _splashScreen->showFullScreen();
     delay(1000);
+}
+
+void MainWindow::connectBottomPanelSignals()
+{
+    ASSERT(connect(ui->backCustomButton, &CustomQLabel::clicked, ui->backPushButton, &QPushButton::released));
+    ASSERT(connect(ui->menuCustomButton, &CustomQLabel::clicked, ui->menuButton, &QPushButton::pressed));
+    ASSERT(connect(ui->boltJointCustomButton, &CustomQLabel::clicked, ui->boltJointButton, &QPushButton::released));
+    ASSERT(connect(ui->marksCustomButton, &CustomQLabel::clicked, ui->notesButton, &QPushButton::pressed));
+    ASSERT(connect(ui->railTypeCustomButton, &CustomQLabel::clicked, ui->railTypeButton, &QPushButton::released));
+    ASSERT(connect(ui->handCustomButton, &CustomQLabel::clicked, ui->handButton, &QPushButton::pressed));
+    ASSERT(connect(ui->pauseCustomButton, &CustomQLabel::clicked, ui->pauseButton, &QPushButton::pressed));
+    ASSERT(connect(ui->searchCustomButton, &CustomQLabel::clicked, ui->scanButton, &QPushButton::pressed));
+    ASSERT(connect(ui->optionsCustomButton, &CustomQLabel::clicked, ui->showHideControlsButton, &QPushButton::released));
 }
 
 void MainWindow::changeStateAcousticContact(bool isEnabled)

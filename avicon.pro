@@ -591,6 +591,7 @@ SOURCES += \
     ui/widgets/note.cpp \
     ui/widgets/clock.cpp \
     ui/widgets/setdate.cpp \
+    ui/widgets/customLabel/customqlabel.cpp \
     ui/widgets/temperature.cpp \
     ui/widgets/soundsettings.cpp \
     ui/widgets/internationalization/languageswitcher.cpp \
@@ -715,6 +716,7 @@ INCLUDEPATH += \
     ui/widgets/options \
     ui/widgets/selectors \
     ui/widgets/misc \
+    ui/widgets/customLabel \
     core \
     core/audio \
     core/screen \
@@ -738,6 +740,7 @@ HEADERS += \
     core/checkcalibration.h \
     core/closure.h \
     core/coredefinitions.h \
+    ui/widgets/customLabel/customqlabel.h \
     core/core.h \
     core/defcore.h \
     core/defectmarker.h \
