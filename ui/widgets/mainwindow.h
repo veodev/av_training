@@ -199,6 +199,8 @@ private:
     void showSplashScreen(QString message);
 
     void connectBottomPanelSignals();
+    void setupLateralButtons();
+    void lateralButtonClicked();
 
 private slots:
     void switchToPage(QWidget* widget);

@@ -13,11 +13,18 @@ public:
     explicit CustomQLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     ~CustomQLabel();
 
+    void setIndexAndSide(int index, int side);
+    int getIndex();
+    int getSide();
+
 signals:
     void clicked();
 
 protected:
     void mousePressEvent(QMouseEvent* me);
+
+    int _index;
+    int _side;
 };
 
 #endif  // CUSTOMQLABEL_H

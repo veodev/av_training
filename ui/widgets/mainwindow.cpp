@@ -312,6 +312,7 @@ void MainWindow::init()
     ui = new Ui::MainWindow;
     emit progressChanged(27);
     ui->setupUi(this);
+    setupLateralButtons();
     ui->bottomPanel->hide();
     connectBottomPanelSignals();
     _testExternalKeyboard = new TestExternalKeyboardWidget();
@@ -2786,6 +2787,66 @@ void MainWindow::connectBottomPanelSignals()
     ASSERT(connect(ui->pauseCustomButton, &CustomQLabel::clicked, ui->pauseButton, &QPushButton::pressed));
     ASSERT(connect(ui->searchCustomButton, &CustomQLabel::clicked, ui->scanButton, &QPushButton::pressed));
     ASSERT(connect(ui->optionsCustomButton, &CustomQLabel::clicked, ui->showHideControlsButton, &QPushButton::released));
+}
+
+void MainWindow::setupLateralButtons()
+{
+    ui->leftLateralButton0->setIndexAndSide(0, 0);
+    ui->leftLateralButton1->setIndexAndSide(1, 0);
+    ui->leftLateralButton2->setIndexAndSide(2, 0);
+    ui->leftLateralButton3->setIndexAndSide(3, 0);
+    ui->leftLateralButton4->setIndexAndSide(4, 0);
+    ui->leftLateralButton5->setIndexAndSide(5, 0);
+    ui->leftLateralButton6->setIndexAndSide(6, 0);
+    ui->leftLateralButton7->setIndexAndSide(7, 0);
+    ui->leftLateralButton8->setIndexAndSide(8, 0);
+    ui->leftLateralButton9->setIndexAndSide(9, 0);
+
+    ui->rightLateralButton0->setIndexAndSide(0, 1);
+    ui->rightLateralButton1->setIndexAndSide(1, 1);
+    ui->rightLateralButton2->setIndexAndSide(2, 1);
+    ui->rightLateralButton3->setIndexAndSide(3, 1);
+    ui->rightLateralButton4->setIndexAndSide(4, 1);
+    ui->rightLateralButton5->setIndexAndSide(5, 1);
+    ui->rightLateralButton6->setIndexAndSide(6, 1);
+    ui->rightLateralButton7->setIndexAndSide(7, 1);
+    ui->rightLateralButton8->setIndexAndSide(8, 1);
+    ui->rightLateralButton9->setIndexAndSide(9, 1);
+
+    connect(ui->leftLateralButton0, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton1, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton2, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton3, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton4, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton5, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton6, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton7, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton8, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->leftLateralButton9, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+
+    connect(ui->rightLateralButton0, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton1, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton2, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton3, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton4, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton5, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton6, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton7, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton8, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+    connect(ui->rightLateralButton9, &CustomQLabel::clicked, this, &MainWindow::lateralButtonClicked);
+}
+
+void MainWindow::lateralButtonClicked()
+{
+    CustomQLabel* lateralButton = qobject_cast<CustomQLabel*>(QObject::sender());
+    LateralPanelType lateralSide = static_cast<LateralPanelType>(lateralButton->getSide());
+    int index = lateralButton->getIndex();
+    if (ui->handLateralPanelView->isVisible() && !ui->leftScanLateralPanelView->isVisible() && !ui->rightScanLateralPanelView->isVisible()) {
+        setHandChannel(index);
+    }
+    else if (!ui->handLateralPanelView->isVisible() && ui->leftScanLateralPanelView->isVisible() && ui->rightScanLateralPanelView->isVisible()) {
+        setScanChannel(index, lateralSide);
+    }
 }
 
 void MainWindow::changeStateAcousticContact(bool isEnabled)
