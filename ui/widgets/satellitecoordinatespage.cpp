@@ -8,9 +8,9 @@
 SatelliteCoordinatesPage::SatelliteCoordinatesPage(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::SatelliteCoordinatesPage)
-#if defined TARGET_AVICON31
+#if defined TARGET_AVICON31 && !defined ANDROID
     , _geoPosition(GeoPosition::instance("/dev/ttymxc1"))
-#elif defined TARGET_AVICON15 || defined TARGET_AVICONDB
+#elif (defined TARGET_AVICON15 || defined TARGET_AVICON31) && defined ANDROID
     , _geoPosition(GeoPosition::instance())
 #endif
 {

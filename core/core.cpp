@@ -303,7 +303,7 @@ void Core::connectCoreSignals()
     ASSERT(connect(_timerForAcNotification, &QTimer::timeout, this, &Core::onTimerForAcNotificationTimeOut));
 #endif
 
-#if defined(TARGET_AVICON15)
+#if defined ANDROID
     ASSERT(connect(this, &Core::doBatteryVoltageQury, _defcore, &Defcore::onUMUBatteryVoltageQuery));
     ASSERT(connect(this, &Core::doBatteryPerecentQuery, _defcore, &Defcore::onUMUBatteryChargePercentQuery));
 
@@ -1839,7 +1839,7 @@ void Core::enableAC(bool isEnabled)
     emit doEnableAc(isEnabled);
 }
 
-#ifdef TARGET_AVICON15
+#ifdef ANDROID
 void Core::getUMUBatteryVoltage(void)
 {
     emit doBatteryVoltageQury();

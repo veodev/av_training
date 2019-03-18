@@ -13,7 +13,7 @@ GeoPosition::GeoPosition(QObject* parent)
     , _prevStatus(AntennaStatusUnknown)
     , _antennaStatusTimer(this)
 {
-    QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon15/PositionClass", "enableGps", "(Landroid/content/Context;)V", QtAndroid::androidContext().object());
+    //    QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon31/PositionClass", "enableGps", "(Landroid/content/Context;)V", QtAndroid::androidContext().object());
 
     qRegisterMetaType<GeoPosition::AntennaStatus>("GeoPosition::AntennaStatus");
 
@@ -27,7 +27,7 @@ GeoPosition::GeoPosition(QObject* parent)
     satellitesInfoSource->startUpdates();
 
     ASSERT(connect(&_antennaStatusTimer, &QTimer::timeout, this, &GeoPosition::antennaStatusTimeout));
-    _antennaStatusTimer.start(ANTENNA_STATUS_CHECK_INTERVAL_MS);
+    //    _antennaStatusTimer.start(ANTENNA_STATUS_CHECK_INTERVAL_MS);
 }
 
 GeoPosition::~GeoPosition()
@@ -48,7 +48,7 @@ GeoPosition::AntennaStatus GeoPosition::antennaStatus()
 {
     AntennaStatus status = AntennaStatusUnknown;
 
-    bool value = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/PositionClass", "isGpsEnabled", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
+    bool value = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/PositionClass", "isGpsEnabled", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
     if (value) {
         status = AntennaStatusConnected;
     }

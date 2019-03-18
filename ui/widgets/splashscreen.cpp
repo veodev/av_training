@@ -28,10 +28,10 @@ SplashScreen::SplashScreen(QWidget* parent)
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->setMargin(50);
 
-#if defined(ANDROID)
-    _progressBar.setMaximumHeight(5);
-    _progressBar.setTextVisible(false);
-#endif
+    //#if defined(ANDROID)
+    //    _progressBar.setMaximumHeight(5);
+    //    _progressBar.setTextVisible(false);
+    //#endif
 
     _logoLabel.setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     _logoLabel.setFixedSize(80, 80);

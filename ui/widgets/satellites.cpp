@@ -8,9 +8,9 @@ Satellites::Satellites(QWidget* parent)
     , ui(new Ui::Satellites)
 {
     ui->setupUi(this);
-#if defined TARGET_AVICON31
+#if defined TARGET_AVICON31 && !defined ANDROID
     GeoPosition* geoPosition = GeoPosition::instance("/dev/ttymxc1");
-#elif defined TARGET_AVICON15
+#elif (defined TARGET_AVICON15 || defined TARGET_AVICON31) && defined ANDROID
     GeoPosition* geoPosition = GeoPosition::instance();
 #endif
 #if defined TARGET_AVICON15 || defined TARGET_AVICON31

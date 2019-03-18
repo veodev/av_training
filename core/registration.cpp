@@ -43,9 +43,9 @@ Registration::Registration(QObject* parent)
     , _isCheckAcousticContact(restoreStateAcousticContactControl())
     , _isCloseHeader(false)
     , _regarStatus(restoreRegarStatus())
-#if defined TARGET_AVICON31
+#if defined TARGET_AVICON31 && !defined ANDROID
     , _geoPosition(GeoPosition::instance("/dev/ttymxc1"))
-#elif defined TARGET_AVICON15
+#elif (defined TARGET_AVICON15 || defined TARGET_AVICON31) && defined ANDROID
     , _geoPosition(GeoPosition::instance())
 #endif
     , _tempTrackMarks(nullptr)
@@ -941,12 +941,12 @@ void Registration::modifyRegistrationFileHeader(const QString& operatorName, con
     _dataContainer->EndModifyHeader(isDirectionIncrease ? 1 : -1);
 }
 
-int Registration::openFile(const QString &fileName)
+int Registration::openFile(const QString& fileName)
 {
-    if(_dataContainer != nullptr){
+    if (_dataContainer != nullptr) {
         return _dataContainer->openFile(fileName);
     }
-    else{
+    else {
         start();
         return _dataContainer->openFile(fileName);
     }
@@ -957,7 +957,7 @@ void Registration::closeFile()
     _dataContainer->closeViewFile();
 }
 
-void Registration::distanceCalculate(int &km, int &pk, int &m, int disCoord, int sysCoord, int &direct)
+void Registration::distanceCalculate(int& km, int& pk, int& m, int disCoord, int sysCoord, int& direct)
 {
     _dataContainer->distanceCalculate(km, pk, m, disCoord, sysCoord, direct);
 }
@@ -967,7 +967,7 @@ void Registration::changeLastSpeed(float speed)
     _lastSpeed = speed;
 }
 
-void Registration::delegateSensToModel(int disCoord, std::vector<std::vector<unsigned char> > &kuSens, std::vector<std::vector<unsigned char> > &stStrSens, std::vector<std::vector<unsigned char> > &endStrSens)
+void Registration::delegateSensToModel(int disCoord, std::vector<std::vector<unsigned char>>& kuSens, std::vector<std::vector<unsigned char>>& stStrSens, std::vector<std::vector<unsigned char>>& endStrSens)
 {
     _dataContainer->delegateSensToModel(disCoord, kuSens, stStrSens, endStrSens);
 }

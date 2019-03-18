@@ -34,14 +34,14 @@ void WifiManagerPage::setVisible(bool visible)
 
 void WifiManagerPage::on_wifiOnButton_released()
 {
-    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/WifiAccess", "enableWifi", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
+    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/WifiAccess", "enableWifi", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
     Q_UNUSED(res);
 }
 
 void WifiManagerPage::on_wifiOffButton_released()
 {
     ui->networksListWidget->clear();
-    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/WifiAccess", "disableWifi", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
+    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/WifiAccess", "disableWifi", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
     Q_UNUSED(res);
     _isWifiOn = false;
     emit disconnectToWifi();
@@ -53,7 +53,7 @@ void WifiManagerPage::on_connectButton_released()
     if (selectedItems.isEmpty() == false) {
         QString ssid = selectedItems.first();
         QAndroidJniObject ssidJni = QAndroidJniObject::fromString(ssid);
-        QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon15/WifiAccess", "connectToSsid", "(Landroid/content/Context;Ljava/lang/String;)V", QtAndroid::androidContext().object(), ssidJni.object<jstring>());
+        QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon31/WifiAccess", "connectToSsid", "(Landroid/content/Context;Ljava/lang/String;)V", QtAndroid::androidContext().object(), ssidJni.object<jstring>());
         emit connectToWifi();
     }
 }
@@ -61,7 +61,7 @@ void WifiManagerPage::on_connectButton_released()
 void WifiManagerPage::on_scanButton_released()
 {
     ui->networksListWidget->clear();
-    QAndroidJniObject resString = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon15/WifiAccess", "scanWifi", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
+    QAndroidJniObject resString = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon31/WifiAccess", "scanWifi", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
     QString qtString = resString.toString();
     QStringList splitQtString = qtString.split("///");
     splitQtString.removeLast();
@@ -70,7 +70,7 @@ void WifiManagerPage::on_scanButton_released()
 
 void WifiManagerPage::onCheckWifiTimerTimeout()
 {
-    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/WifiAccess", "isWifiEnabled", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
+    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/WifiAccess", "isWifiEnabled", "(Landroid/content/Context;)Z", QtAndroid::androidContext().object());
     if (res) {
         ui->wifiStatusLabel->setStyleSheet("color: green; font: bold;");
         ui->wifiStatusLabel->setText(tr("ON"));
@@ -82,9 +82,9 @@ void WifiManagerPage::onCheckWifiTimerTimeout()
         _isWifiOn = false;
     }
 
-    QAndroidJniObject ipAddressObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon15/WifiAccess", "getIpAddress", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
-    QAndroidJniObject ssidObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon15/WifiAccess", "getSsid", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
-    QAndroidJniObject defaultGatewayObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon15/WifiAccess", "getDefaultGateway", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
+    QAndroidJniObject ipAddressObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon31/WifiAccess", "getIpAddress", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
+    QAndroidJniObject ssidObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon31/WifiAccess", "getSsid", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
+    QAndroidJniObject defaultGatewayObject = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon31/WifiAccess", "getDefaultGateway", "(Landroid/content/Context;)Ljava/lang/String;", QtAndroid::androidContext().object());
     QString ipAddress = ipAddressObject.toString();
     QString ssid = ssidObject.toString();
     _defaultGateway = defaultGatewayObject.toString();

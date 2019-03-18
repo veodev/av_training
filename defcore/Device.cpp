@@ -14,10 +14,10 @@
 #include "prot_umu/prot_umu_usbcan_win.h"
 #endif
 
-#ifdef ANDROID
-#include "datatransfers/datatransfer_usbcan_and.h"
-#include "prot_umu/prot_umu_usbcan_and.h"
-#endif
+//#ifdef ANDROID
+//#include "datatransfers/datatransfer_usbcan_and.h"
+//#include "prot_umu/prot_umu_usbcan_and.h"
+//#endif
 
 #include "datatransfers/datatransfer_lan.h"
 #include "prot_umu/prot_umu_padcan.h"
@@ -132,9 +132,9 @@ cDevice::cDevice(cThreadClassList* ThreadClassList, cDeviceConfig* Config, cDevi
 #ifdef WIN32
     dt_usbcan = new (std::nothrow) cDataTransferUsbCanWin;
 #endif
-#ifdef ANDROID
-    dt_usbcanand = new (std::nothrow) cDataTransferUsbCanAnd;
-#endif
+    //#ifdef ANDROID
+    //    dt_usbcanand = new (std::nothrow) cDataTransferUsbCanAnd;
+    //#endif
 
 
     // Буфер для протокола и настроек соединения для i-ого бума
@@ -166,10 +166,10 @@ cDevice::cDevice(cThreadClassList* ThreadClassList, cDeviceConfig* Config, cDevi
             break;
 
         case eProtUSBCANAND:
-#ifdef ANDROID
-            dt_curr = dt_usbcanand;
-            iumu = new (std::nothrow) UMU_USBCANAND;
-#endif
+            //#ifdef ANDROID
+            //            dt_curr = dt_usbcanand;
+            //            iumu = new (std::nothrow) UMU_USBCANAND;
+            //#endif
             break;
 
         default:
@@ -480,9 +480,9 @@ cDevice::~cDevice()  // Деструктор
 #ifdef WIN32
     delete dt_usbcan;
 #endif
-#ifdef ANDROID
-    delete dt_usbcanand;
-#endif
+    //#ifdef ANDROID
+    //    delete dt_usbcanand;
+    //#endif
 
     StrobeModeList_.clear();
     ResetValidRangesArr();

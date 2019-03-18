@@ -158,7 +158,7 @@ public:
     void restoreACValues();
     void checkExtraLogs();
 
-#ifdef TARGET_AVICON15
+#ifdef ANDROID
     void getUMUBatteryVoltage(void);
     void getUMUBatteryPercent(void);
 #endif
@@ -182,7 +182,7 @@ public:
     void initTemperatureManager();
     void useAutoGainAdjustment(bool value);
 
-    int openFile(QString &dir, QString &fileName);
+    int openFile(QString& dir, QString& fileName);
     QString getFileName();
     void closeFile();
     void setCurrentTrackMark(int disCoord, int sysCoord);
@@ -317,7 +317,7 @@ signals:
     void doVideoModeRealtime();
     void doVideoSetCoord(unsigned int coord);
 
-#ifdef TARGET_AVICON15
+#ifdef ANDROID
     void doBatteryVoltageQury(void);
     void doBatteryPerecentQuery(void);
 

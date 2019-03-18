@@ -1580,7 +1580,7 @@ void Defcore::SetTimeToFixBadSens(int TimeToFixBadSens)
     _criticalSection->Release();
 }
 
-#ifdef TARGET_AVICON15
+#ifdef ANDROID
 void Defcore::onUMUBatteryVoltageQuery(void)
 {
     Q_ASSERT(thread() == QThread::currentThread());

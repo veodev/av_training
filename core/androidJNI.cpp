@@ -7,7 +7,7 @@ void setBrightnessJNI(int value)
 {
     QAndroidJniObject activity = QtAndroid::androidActivity();
 
-    QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon15/System", "setSystemBrightness", "(ILorg/qtproject/qt5/android/bindings/QtActivity;)V", (int) ((value * 255) / 100), activity.object<jobject>());
+    QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon31/System", "setSystemBrightness", "(ILorg/qtproject/qt5/android/bindings/QtActivity;)V", (int) ((value * 255) / 100), activity.object<jobject>());
 }
 
 void loggerJNI(const QString& tag, const QString& msg)
@@ -23,10 +23,10 @@ int getBatteryLevelJNI()
 {
     QAndroidJniObject activity = QtAndroid::androidActivity();
 
-    return QAndroidJniObject::callStaticMethod<jint>("com/radioavionica/avicon15/System", "getBatteryLevel", "(Lorg/qtproject/qt5/android/bindings/QtActivity;)I", activity.object<jobject>());
+    return QAndroidJniObject::callStaticMethod<jint>("com/radioavionica/avicon31/System", "getBatteryLevel", "(Lorg/qtproject/qt5/android/bindings/QtActivity;)I", activity.object<jobject>());
 }
 
 int getAvailableExternalMemoryPercentJNI()
 {
-    return QAndroidJniObject::callStaticMethod<jint>("com/radioavionica/avicon15/System", "getAvailableExternalMemoryPercent", "()I");
+    return QAndroidJniObject::callStaticMethod<jint>("com/radioavionica/avicon31/System", "getAvailableExternalMemoryPercent", "()I");
 }

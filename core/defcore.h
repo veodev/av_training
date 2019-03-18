@@ -142,7 +142,7 @@ public slots:
     void onDeviceEnableFiltration(bool isEnable);
     void onSetDeviceFilterParams(tBScan2FilterParamId prmId, int value);
 
-#if defined TARGET_AVICON15
+#if defined ANDROID
     void onUMUBatteryVoltageQuery(void);
     void onUMUBatteryChargePercentQuery(void);
 #endif
@@ -190,7 +190,7 @@ signals:
 
     void doUmuConnectionStatusChanged(bool isConnected);
 
-#ifdef TARGET_AVICON15
+#ifdef ANDROID
     void doBatteryVoltage(double voltage);
     void doBatteryChargePercent(double percent);
 #endif

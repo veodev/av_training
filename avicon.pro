@@ -169,17 +169,20 @@ INCLUDEPATH += $${QWT_INC_PATH}
 message("QWT_INCLUDE_PATH:" $$QWT_INC_PATH)
 
 # geoposition
-avicon15:android {
-message("GEOPOSITION ANDROID")
-INCLUDEPATH += \
-    core/geoposition/android
-HEADERS += \
-    core/androidJNI.h \
-    core/geoposition/android/geoposition.h
 
-SOURCES += \
-    core/androidJNI.cpp \
-    core/geoposition/android/geoposition.cpp
+avicon15 | avicon31{
+    android {
+    message("GEOPOSITION ANDROID")
+    INCLUDEPATH += \
+        core/geoposition/android
+    HEADERS += \
+        core/androidJNI.h \
+        core/geoposition/android/geoposition.h
+
+    SOURCES += \
+        core/androidJNI.cpp \
+        core/geoposition/android/geoposition.cpp
+    }
 }
 
 avicon15 | avicondb {
@@ -227,7 +230,7 @@ avicon31:linux-buildroot-g++ | linux-imx51-g++ {
     message("USE ALSA!")
 }
 
-if (avicon15) {
+if (avicon15 || avicon31) {
     if (android-g++) {
         message("BLUETOOTH ANDROID")
         HEADERS += \
@@ -279,7 +282,8 @@ clang {
     HEADERS += \
         core/bluetooth/bluetoothmanagerqt.h
 }
-avicon15:android {
+avicon15 | avicon31:android {
+    message("EXTERNAL KEYBOARD & BRIGHTNESS & SCREEN FAKE")
     SOURCES += \
         core/externalkeyboard/externalkeyboardfake.cpp \
         core/screen/brightness_fake.cpp \
@@ -496,7 +500,7 @@ else {
     FORMS +=   ui/widgets/wifi/fake/wifimanagerpage.ui
 }
 
-if (avicon15:android) {
+if (avicon15 | avicon31:android) {
     message("WIFI FOR ANDROID")
     INCLUDEPATH -= \
         core/wifimanager \
@@ -981,15 +985,15 @@ avicon15 {
         defcore/DeviceConfig_Av15_usbcan.h
 }
 
-avicon15:android {
-    message("avicon15_for_android")
-    SOURCES += \
-        defcore/sockets/socket_usbcan_and.cpp \
-        defcore/datatransfers/datatransfer_usbcan_and.cpp
-    HEADERS += \
-        defcore/sockets/socket_usbcan_and.h \
-        defcore/datatransfers/datatransfer_usbcan_and.h
-}
+#avicon15 | avicon31:android {
+#    message("avicon15_for_android")
+#    SOURCES += \
+#        defcore/sockets/socket_usbcan_and.cpp \
+#        defcore/datatransfers/datatransfer_usbcan_and.cpp
+#    HEADERS += \
+#        defcore/sockets/socket_usbcan_and.h \
+#        defcore/datatransfers/datatransfer_usbcan_and.h
+#}
 
 avicondbhs {
     SOURCES += \
@@ -1116,16 +1120,16 @@ TRANSLATIONS = \
 android {
         QT = quick $$QT printsupport concurrent androidextras
 
-        NEW_BUM_DRIVER_PATH = $$(NAUTIZ_BUM_DRIVER_PATH)
-        DEVICE_TARGET = Android
-        INCLUDEPATH += $$NEW_BUM_DRIVER_PATH/BumDriver
-        CONFIG(release, debug|release): BUM_DRIVER_LIB = \
-                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Release/libBumDriver.a
-        CONFIG(debug, debug|release): BUM_DRIVER_LIB = \
-                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Debug/libBumDriver.a
-        message("BUM_DRIVER_LIB:"$$BUM_DRIVER_LIB)
-        LIBS += $$BUM_DRIVER_LIB
-        PRE_TARGETDEPS += $$BUM_DRIVER_LIB
+#        NEW_BUM_DRIVER_PATH = $$(NAUTIZ_BUM_DRIVER_PATH)
+#        DEVICE_TARGET = Android
+#        INCLUDEPATH += $$NEW_BUM_DRIVER_PATH/BumDriver
+#        CONFIG(release, debug|release): BUM_DRIVER_LIB = \
+#                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Release/libBumDriver.a
+#        CONFIG(debug, debug|release): BUM_DRIVER_LIB = \
+#                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Debug/libBumDriver.a
+#        message("BUM_DRIVER_LIB:"$$BUM_DRIVER_LIB)
+#        LIBS += $$BUM_DRIVER_LIB
+#        PRE_TARGETDEPS += $$BUM_DRIVER_LIB
 
         DISTFILES += \
             android/AndroidManifest.xml \
@@ -1135,14 +1139,14 @@ android {
             android/build.gradle \
             android/gradle/wrapper/gradle-wrapper.properties \
             android/gradlew.bat \
-            android/src/com/radioavionica/avicon15/System.java \
-            android/src/com/radioavionica/avicon15/WifiAccess.java \
-            android/src/com/radioavionica/avicon15/PositionClass.java \
-            android/src/com/radioavionica/avicon15/BluetoothClass.java
+            android/src/com/radioavionica/avicon31/System.java \
+            android/src/com/radioavionica/avicon31/WifiAccess.java \
+            android/src/com/radioavionica/avicon31/PositionClass.java \
+            android/src/com/radioavionica/avicon31/BluetoothClass.java
 
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
         OTHER_FILES += android/src/com/mycompanyname/myappname/System.java
 }
 
 DISTFILES += \
-    android/src/com/radioavionica/avicon15/CameraClass.java
+    android/src/com/radioavionica/avicon31/CameraClass.java

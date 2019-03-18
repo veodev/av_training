@@ -18,7 +18,7 @@ const int minTimeOffset = -12;
 SetTime::SetTime(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::SetTime)
-#if defined TARGET_AVICON31
+#if defined TARGET_AVICON31 && !defined ANDROID
     , _geoPosition(GeoPosition::instance("/dev/ttymxc1"))
 #endif
     , _timeOffsetManual(restoreTimeOffset())
@@ -38,7 +38,7 @@ SetTime::SetTime(QWidget* parent)
     ui->offsetSpinBox->setVisible(false);
     ASSERT(connect(ui->offsetSpinBox, &SpinBoxNumber::valueChanged, this, &SetTime::onOffsetSpinboxValueChanged));
 
-#if defined TARGET_AVICON31
+#if defined TARGET_AVICON31 && !defined ANDROID
     ASSERT(connect(_geoPosition, &GeoPosition::positionUpdated, this, &SetTime::onUpdateTimeAndCoordinate));
 #endif
 }
@@ -198,13 +198,13 @@ int SetTime::convertToCurrentHours(const int& timeOffset, const int& hours)
 }
 
 void SetTime::on_okButton_released()
-{    
+{
     QDateTime dateTime = QDateTime::currentDateTime();
-    dateTime.setTime(_time);    
+    dateTime.setTime(_time);
     QString sudoCommand;
 #if defined TARGET_AVICONDB || defined TARGET_AVICONDBHS
     sudoCommand = "sudo ";
-#endif    
+#endif
     if (runProcess(sudoCommand + QString("/bin/date -s \"%1\"").arg(dateTime.toUTC().toString("yyyy-MM-dd hh:mm:ss"))) == true) {
         // Set the Hardware Clock to the current System Time.
         runProcess(sudoCommand + "hwclock -w");

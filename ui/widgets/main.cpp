@@ -19,7 +19,7 @@
 #include "splashscreen.h"
 #include "core.h"
 
-#ifndef TARGET_AVICON15
+#ifndef ANDROID
 void fixBadSystemDate()
 {
     time_t t = time(NULL);
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
         }
     }
     qDebug() << "Avicon started!";
-#ifndef TARGET_AVICON15
+#ifndef ANDROID
     fixBadSystemDate();
 #endif
 
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
     splashScreen->setOrganizationName(organisationName().toUpper());
     splashScreen->setApplicationName(applicationName().toUpper());
     splashScreen->setApplicationVersion(APP_VERSION);
-    //    splashScreen->showFullScreen();
+    splashScreen->showFullScreen();
     splashScreen->changeProgress(5);
     qApp->processEvents();
 

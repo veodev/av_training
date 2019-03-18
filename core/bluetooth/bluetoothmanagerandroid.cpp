@@ -6,7 +6,7 @@ const int CHECK_A2DP_INTERVAL_MS = 3000;
 
 void BluetoothManagerAndroid::onCheckA2dpConnection()
 {
-    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/BluetoothClass", "isBluetoothConnected", "()Z");
+    bool res = QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/BluetoothClass", "isBluetoothConnected", "()Z");
     if (res != _isA2dpConnect) {
         _isA2dpConnect = res;
         emit connectionStatus(_isA2dpConnect);
@@ -22,7 +22,7 @@ BluetoothManagerAndroid::BluetoothManagerAndroid()
     delay(2000);
     setPairedList();
     QtAndroid::runOnAndroidThread([] {
-        QAndroidJniObject jniObject("com/radioavionica/avicon15/BluetoothClass");
+        QAndroidJniObject jniObject("com/radioavionica/avicon31/BluetoothClass");
         jniObject.callMethod<void>("registerBroadcastReceiver", "(Landroid/content/Context;)V", QtAndroid::androidContext().object());
     });
     _checkConnectionTimer.setInterval(CHECK_A2DP_INTERVAL_MS);
@@ -38,10 +38,10 @@ void BluetoothManagerAndroid::addAudioDevice(const QString& macaddr)
 void BluetoothManagerAndroid::enableBluetooth(bool enable)
 {
     if (enable) {
-        QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/BluetoothClass", "enableBluetooth", "()Z");
+        QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/BluetoothClass", "enableBluetooth", "()Z");
     }
     else {
-        QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon15/BluetoothClass", "disableBluetooth", "()Z");
+        QAndroidJniObject::callStaticMethod<jboolean>("com/radioavionica/avicon31/BluetoothClass", "disableBluetooth", "()Z");
     }
 }
 
@@ -49,7 +49,7 @@ void BluetoothManagerAndroid::unpair(const QString& macaddr)
 {
     if (_pairedList.contains(macaddr)) {
         QAndroidJniObject macAddrJni = QAndroidJniObject::fromString(macaddr);
-        QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon15/BluetoothClass", "unpairDevice", "(Ljava/lang/String;)V", macAddrJni.object<jstring>());
+        QAndroidJniObject::callStaticMethod<void>("com/radioavionica/avicon31/BluetoothClass", "unpairDevice", "(Ljava/lang/String;)V", macAddrJni.object<jstring>());
     }
     _pairedList.removeOne(macaddr);
     emit pairingListChanged(_pairedList);
@@ -57,7 +57,7 @@ void BluetoothManagerAndroid::unpair(const QString& macaddr)
 
 void BluetoothManagerAndroid::setPairedList()
 {
-    QAndroidJniObject resString = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon15/BluetoothClass", "getPairedDevices", "()Ljava/lang/String;");
+    QAndroidJniObject resString = QAndroidJniObject::callStaticObjectMethod("com/radioavionica/avicon31/BluetoothClass", "getPairedDevices", "()Ljava/lang/String;");
     QString pairedDevices = resString.toString();
     QStringList splitPairedDevices = pairedDevices.split("|");
     splitPairedDevices.removeLast();

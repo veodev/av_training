@@ -123,6 +123,9 @@
     </property>
     <item>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <property name="spacing">
        <number>0</number>
       </property>
@@ -130,6 +133,9 @@
        <layout class="QHBoxLayout" name="topHorizontalLayout">
         <property name="spacing">
          <number>0</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetFixedSize</enum>
         </property>
         <item>
          <widget class="QWidget" name="leftLateralButtons" native="true">
@@ -9285,9 +9291,15 @@ border-color: rgba(255, 255, 255, 0);</string>
       </item>
       <item row="1" column="2">
        <widget class="QWidget" name="widget_3" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
+          <width>120</width>
           <height>0</height>
          </size>
         </property>
@@ -9383,7 +9395,7 @@ border-color: rgba(255, 255, 255, 0);</string>
             <number>20</number>
            </property>
            <property name="bottomMargin">
-            <number>10</number>
+            <number>5</number>
            </property>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_25">
@@ -9400,6 +9412,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -9423,6 +9441,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -9444,6 +9468,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -9467,6 +9497,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -9488,6 +9524,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -9667,6 +9709,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -9688,6 +9736,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -9711,6 +9765,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -9733,6 +9793,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -9754,6 +9820,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -10046,7 +10118,7 @@ border-color: rgba(255, 255, 255, 0);</string>
        <widget class="QWidget" name="widget_2" native="true">
         <property name="minimumSize">
          <size>
-          <width>100</width>
+          <width>120</width>
           <height>0</height>
          </size>
         </property>
@@ -10163,6 +10235,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10184,6 +10262,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -10207,6 +10291,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10229,6 +10319,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10250,6 +10346,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -10486,6 +10588,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10507,6 +10615,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -10530,6 +10644,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10552,6 +10672,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -10573,6 +10699,12 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>

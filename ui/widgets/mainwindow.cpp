@@ -306,12 +306,12 @@ void MainWindow::init()
     emit messageChanged(tr("Core initing ..."));
     emit progressChanged(14);
     Core& core = Core::instance();
-
     emit messageChanged(tr("Main window initing ..."));
     emit progressChanged(21);
     ui = new Ui::MainWindow;
     emit progressChanged(27);
     ui->setupUi(this);
+    emit progressChanged(30);
     setupLateralButtons();
     ui->bottomPanel->hide();
     connectBottomPanelSignals();
@@ -439,7 +439,7 @@ void MainWindow::init()
 #if defined TARGET_AVICON31
     move(-72, 0);
     core.setCurrentDirection(_registrationPage->getDirection());
-    show();
+    showFullScreen();
 #elif defined TARGET_AVICONDB
     showFullScreen();
 #else
@@ -1615,7 +1615,7 @@ void MainWindow::retranslateUi()
     }
 
 #if defined ANDROID
-    configureBottomPanelForAndroid();
+//    configureBottomPanelForAndroid();
 #endif
 #if defined TARGET_AVICON15
     setupPowerOffLabel();
