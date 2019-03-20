@@ -331,6 +331,7 @@ SOURCES += \
     ui/widgets/av17/DataFileUnit.cpp \
     ui/widgets/av17/av17projections.cpp
 HEADERS += \
+    core/enums.h \
     ui/widgets/av17/av17defview.h \
     ui/widgets/av17/av17page.h \
     ui/widgets/av17/av17plot.h \
