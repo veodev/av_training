@@ -8,267 +8,184 @@
 #include "remotecontrol.h"
 #include "settings.h"
 
-const int PING_INTERVAL_MS = 300;
+const int PING_INTERVAL_MS = 500;
 const int WATCHDOG_INTERVAL_MS = 3000;
 
 RemoteControl::RemoteControl(QObject* parent)
     : QObject(parent)
-    , _tcpServer(nullptr)
-    , _tcpSocket(nullptr)
-    , _isRegistrationStarted(false)
-    , _pingTimer(nullptr)
-    , _watchdog(nullptr)
+    , _rcTcpServer(nullptr)
+    , _rcTcpSocket(nullptr)
+    , _trainingPcTcpSocket(nullptr)
+    , _rcPingTimer(new QTimer(this))
+    , _trainingPcPingTimer(new QTimer(this))
+    , _rcWatchdog(new QTimer(this))
+    , _trainingPcWatchdog(new QTimer(this))
 {
-    _pingTimer = new QTimer(this);
-    _pingTimer->setInterval(PING_INTERVAL_MS);
-    connect(_pingTimer, &QTimer::timeout, this, &RemoteControl::onPingSendTimerTimeout);
+    _rcPort = restoreRcTcpServerPort();
+    _trainingPcIpAddress = restoreTrainingPcTcpServerIpAddress();
+    _trainingPcPort = restoreTrainingPcTcpServerPort();
 
-    _watchdog = new QTimer(this);
-    _watchdog->setInterval(WATCHDOG_INTERVAL_MS);
-    connect(_watchdog, &QTimer::timeout, this, &RemoteControl::onWatchdogTimeout);
-}
+    connect(_rcWatchdog, &QTimer::timeout, this, &RemoteControl::rcWatchdogTimeout);
+    _rcWatchdog->setInterval(WATCHDOG_INTERVAL_MS);
 
-void RemoteControl::sendMeter(int m)
-{
-    QByteArray message;
-    message.append(CurrentMeter);
-    message.append(reinterpret_cast<char*>(&m), sizeof(int));
-    sendMessage(message);
-}
+    connect(_rcPingTimer, &QTimer::timeout, this, &RemoteControl::rcPingTimerTimeout);
+    _rcPingTimer->setInterval(PING_INTERVAL_MS);
 
-void RemoteControl::updateRemoteState(bool isRegOn, ViewCoordinate viewType, Direction direction, int km, int pk, int m)
-{
-    QByteArray message;
-    message.append(UpdateState);
-    message.append(isRegOn);
-    message.append(viewType);
-    message.append(reinterpret_cast<char*>(&direction), sizeof(Direction));
-    message.append(reinterpret_cast<char*>(&km), sizeof(int));
-    message.append(static_cast<char>(pk));
-    message.append(reinterpret_cast<char*>(&m), sizeof(int));
-    sendMessage(message);
-}
+    connect(_trainingPcWatchdog, &QTimer::timeout, this, &RemoteControl::trainingPcWatchdogTimeout);
+    _trainingPcWatchdog->setInterval(WATCHDOG_INTERVAL_MS);
 
-void RemoteControl::updateTrackMarks(int km, int pk, int m)
-{
-    QByteArray message;
-    message.append(CurrentTrackMarks);
-    message.append(reinterpret_cast<char*>(&km), sizeof(int));
-    message.append(static_cast<char>(pk));
-    message.append(reinterpret_cast<char*>(&m), sizeof(int));
-    sendMessage(message);
-}
-
-void RemoteControl::updateRemoteMarks()
-{
-    QByteArray message;
-    message.append(ClearMarksLists);
-    sendMessage(message);
-
-    _bridgesList = restoreBridgesToSettings();
-    _platformsList = restorePlatformsToSettings();
-    _miscList = restoreMiscToSettings();
-    sendStringList(BridgesItem, _bridgesList);
-    sendStringList(PlatformsItem, _platformsList);
-    sendStringList(MiscItem, _miscList);
-
-    message.clear();
-    message.append(UpdateMarksLists);
-    sendMessage(message);
-}
-
-void RemoteControl::changeSpeed(double value)
-{
-    float speed = static_cast<float>(value);
-    QByteArray message;
-    message.append(CurrentSpeed);
-    message.append(reinterpret_cast<char*>(&speed), sizeof(float));
-    sendMessage(message);
+    connect(_trainingPcPingTimer, &QTimer::timeout, this, &RemoteControl::trainingPcPingTimerTimeout);
+    _trainingPcPingTimer->setInterval(PING_INTERVAL_MS);
 }
 
 void RemoteControl::start()
 {
-    _tcpServer = new QTcpServer(this);
-    connect(_tcpServer, &QTcpServer::newConnection, this, &RemoteControl::onNewConnection);
+    _rcTcpServer = new QTcpServer(this);
+    connect(_rcTcpServer, &QTcpServer::newConnection, this, &RemoteControl::rcTcpServerNewConnection);
 }
 
 void RemoteControl::listen()
 {
-    qDebug() << "Remote control server started: " << _tcpServer->listen(QHostAddress::Any, 49001);
+    qDebug() << "Remote control server started: " << _rcTcpServer->listen(QHostAddress::Any, _rcPort);
+    connectTrainingPc();
 }
 
-void RemoteControl::onNewConnection()
+void RemoteControl::rcTcpServerNewConnection()
 {
-    if (_tcpSocket == nullptr) {
-        _tcpSocket = _tcpServer->nextPendingConnection();
-        connect(_tcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::onCloseConnection);
-        connect(_tcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::onReadyRead);
-        emit doRemoteControlConnected();
-        emit doUpdateRemoteState();
-        updateRemoteMarks();
-        if (_pingTimer->isActive() == false) {
-            _pingTimer->start();
+    if (_rcTcpSocket != nullptr) {
+        disconnect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
+        disconnect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
+        _rcTcpSocket->disconnectFromHost();
+        _rcTcpSocket->deleteLater();
+        _rcTcpSocket = nullptr;
+    }
+    _rcTcpSocket = _rcTcpServer->nextPendingConnection();
+    connect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
+    connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
+    emit doRcConnected();
+    _rcPingTimer->start();
+}
+
+void RemoteControl::rcTcpSocketDisconnected()
+{
+    _rcPingTimer->stop();
+    _rcTcpSocket->deleteLater();
+    _rcTcpSocket = nullptr;
+    emit doRcDisconnected();
+}
+
+void RemoteControl::connectTrainingPc()
+{
+    if (_trainingPcTcpSocket == nullptr) {
+        _trainingPcTcpSocket = new QTcpSocket(this);
+        connect(_trainingPcTcpSocket, &QTcpSocket::stateChanged, this, &RemoteControl::trainingPcTcpSocketStateChanged);
+        connect(_trainingPcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::trainingPcTcpSocketReadyRead);
+        _trainingPcTcpSocket->connectToHost(_trainingPcIpAddress, _trainingPcPort);
+    }
+}
+
+void RemoteControl::disconnectTrainingPc()
+{
+    if (_trainingPcTcpSocket != nullptr) {
+        _trainingPcTcpSocket->disconnectFromHost();
+        disconnect(_trainingPcTcpSocket, &QTcpSocket::stateChanged, this, &RemoteControl::trainingPcTcpSocketStateChanged);
+        disconnect(_trainingPcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::trainingPcTcpSocketReadyRead);
+        _trainingPcTcpSocket->deleteLater();
+        _trainingPcTcpSocket = nullptr;
+    }
+}
+
+void RemoteControl::trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState state)
+{
+    switch (state) {
+    case QAbstractSocket::UnconnectedState:
+        emit doRcDisconnected();
+        disconnectTrainingPc();
+        QTimer::singleShot(3000, this, &RemoteControl::connectTrainingPc);
+        break;
+    case QAbstractSocket::ConnectingState:
+        break;
+    case QAbstractSocket::ConnectedState:
+        _trainingPcPingTimer->start();
+        emit doTrainingPcConnected();
+        break;
+    default:
+        break;
+    }
+}
+
+void RemoteControl::trainingPcTcpSocketReadyRead()
+{
+    _trainingPcMessagesBuffer.append(_trainingPcTcpSocket->readAll());
+    parseTrainingPcMessages();
+}
+
+
+void RemoteControl::rcWatchdogTimeout()
+{
+    _rcPingTimer->stop();
+    emit doRcDisconnected();
+}
+
+void RemoteControl::rcPingTimerTimeout()
+{
+    sendMessageToRc(TrainingEnums::MessageId::PingId);
+}
+
+void RemoteControl::trainingPcWatchdogTimeout()
+{
+    _trainingPcPingTimer->stop();
+    emit doTrainingPcDisconnected();
+}
+
+void RemoteControl::trainingPcPingTimerTimeout()
+{
+    sendMessageToTrainingPc(TrainingEnums::MessageId::PingId);
+}
+
+void RemoteControl::sendMessageToTrainingPc(TrainingEnums::MessageId messageId, QByteArray data)
+{
+    if (_trainingPcTcpSocket != nullptr) {
+        TrainingEnums::MessageHeader header;
+        header.Id = static_cast<unsigned char>(messageId);
+        header.Reserved1 = 0;
+        header.Size = static_cast<ushort>(data.size());
+        _trainingPcTcpSocket->write(reinterpret_cast<char*>(&header), sizeof(header));
+        if (!data.isEmpty()) {
+            _trainingPcTcpSocket->write(data);
         }
-    }
-    else {
-        _tcpServer->nextPendingConnection()->close();
+        _trainingPcTcpSocket->flush();
     }
 }
 
-void RemoteControl::onCloseConnection()
+void RemoteControl::sendMessageToRc(TrainingEnums::MessageId messageId, QByteArray data)
 {
-    _pingTimer->stop();
-    disconnect(_tcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::onCloseConnection);
-    _tcpSocket->deleteLater();
-    _tcpSocket = nullptr;
-    emit doRemoteControlDisconnected();
-}
-
-void RemoteControl::onReadyRead()
-{
-    while (_tcpSocket->bytesAvailable()) {
-        _messagesBuffer.append(_tcpSocket->readAll());
-    }
-    readMessageFromBuffer();
-}
-
-void RemoteControl::onPingSendTimerTimeout()
-{
-    QByteArray message;
-    message.append(PingRemoteControl);
-    sendMessage(message);
-}
-
-void RemoteControl::onWatchdogTimeout()
-{
-    _watchdog->stop();
-    onCloseConnection();
-    emit doRemoteControlPingFail();
-}
-
-void RemoteControl::sendStringList(RemoteControlHeaders header, QStringList& list)
-{
-    for (QString& item : list) {
-        QByteArray message;
-        message.append(header);
-        message.append(item.toUtf8());
-        sendMessage(message);
+    if (_rcTcpSocket != nullptr) {
+        TrainingEnums::MessageHeader header;
+        header.Id = static_cast<unsigned char>(messageId);
+        header.Reserved1 = 0;
+        header.Size = static_cast<ushort>(data.size());
+        _rcTcpSocket->write(reinterpret_cast<char*>(&header), sizeof(header));
+        if (!data.isEmpty()) {
+            _rcTcpSocket->write(data);
+        }
+        _rcTcpSocket->flush();
     }
 }
 
-void RemoteControl::sendMessage(QByteArray& message)
+void RemoteControl::parseTrainingPcMessages()
 {
-    if (_tcpSocket != nullptr) {
-        quint16 size = static_cast<quint16>(message.size());
-        _tcpSocket->write(reinterpret_cast<char*>(&size), sizeof(quint16));
-        _tcpSocket->write(message);
-        _tcpSocket->flush();
-    }
-}
-
-void RemoteControl::readMessageFromBuffer()
-{
-    RemoteControlHeaders header = UnknownHeader;
+    TrainingEnums::MessageHeader header;
     while (true) {
-        if (_messagesBuffer.size() >= static_cast<int>(sizeof(qint16))) {
-            quint16 size = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(quint16)).data()));
-            if (_messagesBuffer.size() >= size) {
-                _messagesBuffer.remove(0, sizeof(quint16));
-                header = static_cast<RemoteControlHeaders>(_messagesBuffer.at(0));
-                _messagesBuffer.remove(0, sizeof(RemoteControlHeaders));
-                switch (static_cast<RemoteControlHeaders>(header)) {
-                case StartRegistration:
-                    if (_isRegistrationStarted == false) {
-                        _isRegistrationStarted = true;
-                        emit doStartRegistration();
-                    }
+        if (_trainingPcMessagesBuffer.size() >= static_cast<int>(sizeof(header))) {
+            header.Id = static_cast<uchar>(_trainingPcMessagesBuffer.at(0));
+            header.Size = qFromLittleEndian<ushort>(reinterpret_cast<const uchar*>(_trainingPcMessagesBuffer.mid(2, sizeof(ushort)).data()));
+            _trainingPcMessagesBuffer.remove(0, sizeof(header));
+            if (_trainingPcMessagesBuffer.size() >= header.Size) {
+                switch (static_cast<TrainingEnums::MessageId>(header.Id)) {
+                case TrainingEnums::MessageId::PingId:
+                    _trainingPcWatchdog->start();
                     break;
-                case StopRegistration:
-                    _isRegistrationStarted = false;
-                    emit doStopRegistration();
-                    break;
-                case CurrentTrackMarks: {
-                    int km = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    int pk = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-                    emit doCurrentTrackMark(km, pk);
-                    break;
-                }
-                case SatellitesInUse: {
-                    int satellitesInUse = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    emit doSatellitesInUse(satellitesInUse);
-                    break;
-                }
-                case SatellitesInfo: {
-                    float latitude = qFromLittleEndian<float>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(float)).data()));
-                    _messagesBuffer.remove(0, sizeof(float));
-                    float longitude = qFromLittleEndian<float>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(float)).data()));
-                    _messagesBuffer.remove(0, sizeof(float));
-                    float altitude = qFromLittleEndian<float>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(float)).data()));
-                    _messagesBuffer.remove(0, sizeof(float));
-                    float direction = qFromLittleEndian<float>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(float)).data()));
-                    _messagesBuffer.remove(0, sizeof(float));
-                    float speed = qFromLittleEndian<float>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(float)).data()));
-                    _messagesBuffer.remove(0, sizeof(float));
-                    int year = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    int month = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-                    int day = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-                    int hours = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-                    int minutes = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-                    int seconds = static_cast<int>(_messagesBuffer.at(0));
-                    _messagesBuffer.remove(0, sizeof(char));
-
-                    QGeoPositionInfo geoPositionInfo;
-                    geoPositionInfo.setCoordinate(QGeoCoordinate(static_cast<double>(latitude), static_cast<double>(longitude), static_cast<double>(altitude)));
-                    geoPositionInfo.setTimestamp(QDateTime(QDate(year, month, day), QTime(hours, minutes, seconds)));
-                    geoPositionInfo.setAttribute(QGeoPositionInfo::Direction, static_cast<qreal>(direction));
-                    geoPositionInfo.setAttribute(QGeoPositionInfo::GroundSpeed, static_cast<qreal>(speed));
-                    emit doSatellitesInfo(geoPositionInfo);
-                    break;
-                }
-                case BridgesItem: {
-                    int index = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    if (index >= 0 && index < _bridgesList.size()) {
-                        QString label = _bridgesList.at(index);
-                        emit doTextLabel(label);
-                    }
-                    break;
-                }
-                case PlatformsItem: {
-                    int index = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    if (index >= 0 && index < _platformsList.size()) {
-                        QString label = _platformsList.at(index);
-                        emit doTextLabel(label);
-                    }
-                    break;
-                }
-                case MiscItem: {
-                    int index = qFromLittleEndian<int>(reinterpret_cast<const uchar*>(_messagesBuffer.left(sizeof(int)).data()));
-                    _messagesBuffer.remove(0, sizeof(int));
-                    if (index >= 0 && index < _miscList.size()) {
-                        QString label = _miscList.at(index);
-                        emit doTextLabel(label);
-                    }
-                    break;
-                }
-                case StartSwitch:
-                    emit doStartSwitchLabel();
-                    break;
-                case EndSwitch:
-                    emit doEndSwitchLabel();
-                    break;
-                case PingRemoteServer: {
-                    _watchdog->start();
-                }
                 default:
                     break;
                 }
@@ -281,4 +198,37 @@ void RemoteControl::readMessageFromBuffer()
             break;
         }
     }
+}
+
+void RemoteControl::parseRcMessages()
+{
+    TrainingEnums::MessageHeader header;
+    while (true) {
+        if (_rcMessagesBuffer.size() >= static_cast<int>(sizeof(header))) {
+            header.Id = static_cast<uchar>(_rcMessagesBuffer.at(0));
+            header.Size = qFromLittleEndian<ushort>(reinterpret_cast<const uchar*>(_rcMessagesBuffer.mid(2, sizeof(ushort)).data()));
+            _rcMessagesBuffer.remove(0, sizeof(header));
+            if (_rcMessagesBuffer.size() >= header.Size) {
+                switch (static_cast<TrainingEnums::MessageId>(header.Id)) {
+                case TrainingEnums::MessageId::PingId:
+                    _rcWatchdog->start();
+                    break;
+                default:
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+        }
+        else {
+            break;
+        }
+    }
+}
+
+void RemoteControl::rcTcpSocketReadyRead()
+{
+    _rcMessagesBuffer.append(_rcTcpSocket->readAll());
+    parseRcMessages();
 }

@@ -1,6 +1,8 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
+namespace TrainingEnums
+{
 enum class MessageId : unsigned char
 {
     ChangeCduModeId = 1,
@@ -62,5 +64,7 @@ struct MessageHeader
     unsigned char Reserved1;
     unsigned short Size;  // размер блока данных, который следует за заголовком
 };
+
+}  // namespace TrainingEnums
 
 #endif  // ENUMS_H

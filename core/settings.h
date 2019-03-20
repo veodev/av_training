@@ -367,4 +367,13 @@ bool restoreAutoGainAdjustmentStatus();
 void saveParallelVideoBrowsingStatus(bool isEnabled);
 bool restoreParallelVideoBrowsingStatus();
 
+void saveRcTcpServerPort(quint16 port);
+quint16 restoreRcTcpServerPort();
+
+void saveTrainingPcTcpServerPort(quint16 port);
+quint16 restoreTrainingPcTcpServerPort();
+
+void saveTrainingPcTcpServerIpAddress(QString ipAddress);
+QString restoreTrainingPcTcpServerIpAddress();
+
 #endif  // SETTINGS_H

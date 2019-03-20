@@ -390,43 +390,20 @@ void Core::disconnectCoreSignals()
 
 void Core::connectRemoteControlSignals()
 {
-    ASSERT(connect(_remoteControl, &RemoteControl::doRemoteControlConnected, this, &Core::onRemoteControlConnected));
-    ASSERT(connect(_remoteControl, &RemoteControl::doRemoteControlDisconnected, this, &Core::onRemoteControlDisconnected));
-    ASSERT(connect(_remoteControl, &RemoteControl::doRemoteControlPingFail, this, &Core::onRemoteControlPingFailed));
-    ASSERT(connect(_remoteControl, &RemoteControl::doStartRegistration, this, &Core::doStartRegistration));
-    ASSERT(connect(_remoteControl, &RemoteControl::doStopRegistration, this, &Core::doStopRegistration));
-    ASSERT(connect(_remoteControl, &RemoteControl::doUpdateRemoteState, this, &Core::doUpdateRemoteState));
-    ASSERT(connect(_remoteControl, &RemoteControl::doCurrentTrackMark, this, &Core::onCurrentTrackMark));
-    ASSERT(connect(_remoteControl, &RemoteControl::doSatellitesInUse, this, &Core::onSatellitesInUse));
-    ASSERT(connect(_remoteControl, &RemoteControl::doSatellitesInfo, this, &Core::onSatellitesInfo));
-    ASSERT(connect(_remoteControl, &RemoteControl::doStartSwitchLabel, this, &Core::onStartSwitchLabel));
-    ASSERT(connect(_remoteControl, &RemoteControl::doEndSwitchLabel, this, &Core::onEndSwitchLabel));
-    ASSERT(connect(_remoteControl, &RemoteControl::doTextLabel, this, &Core::onTextLabel));
-
-    ASSERT(connect(this, &Core::doUpdateRemoteStateParams, _remoteControl, &RemoteControl::updateRemoteState));
-    ASSERT(connect(this, &Core::doSendMeter, _remoteControl, &RemoteControl::sendMeter));
-    ASSERT(connect(this, &Core::doChangedSpeed, _remoteControl, &RemoteControl::changeSpeed));
-    ASSERT(connect(this, &Core::doCurrentTrackMarks, _remoteControl, &RemoteControl::updateTrackMarks));
     ASSERT(connect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
-    ASSERT(connect(this, &Core::doUpdateRemoteMarks, _remoteControl, &RemoteControl::updateRemoteMarks));
+    ASSERT(connect(_remoteControl, &RemoteControl::doRcConnected, this, &Core::doRcConnected));
+    ASSERT(connect(_remoteControl, &RemoteControl::doRcDisconnected, this, &Core::doRcDisconnected));
+    ASSERT(connect(_remoteControl, &RemoteControl::doTrainingPcConnected, this, &Core::doTrainingPcConnected));
+    ASSERT(connect(_remoteControl, &RemoteControl::doTrainingPcDisconnected, this, &Core::doTrainingPcDisconnected));
 }
 
 void Core::disConnectRemoteControlSignals()
 {
-    disconnect(_remoteControl, &RemoteControl::doRemoteControlConnected, this, &Core::doRemoteControlConnected);
-    disconnect(_remoteControl, &RemoteControl::doRemoteControlDisconnected, this, &Core::doRemoteControlDisconnected);
-    disconnect(_remoteControl, &RemoteControl::doRemoteControlPingFail, this, &Core::onRemoteControlPingFailed);
-    disconnect(_remoteControl, &RemoteControl::doStartRegistration, this, &Core::doStartRegistration);
-    disconnect(_remoteControl, &RemoteControl::doStopRegistration, this, &Core::doStopRegistration);
-    disconnect(_remoteControl, &RemoteControl::doUpdateRemoteState, this, &Core::doUpdateRemoteState);
-    disconnect(_remoteControl, &RemoteControl::doCurrentTrackMark, this, &Core::onCurrentTrackMark);
-    disconnect(_remoteControl, &RemoteControl::doSatellitesInUse, this, &Core::doSatellitesInUse);
-
-    disconnect(this, &Core::doUpdateRemoteStateParams, _remoteControl, &RemoteControl::updateRemoteState);
-    disconnect(this, &Core::doSendMeter, _remoteControl, &RemoteControl::sendMeter);
-    disconnect(this, &Core::doChangedSpeed, _remoteControl, &RemoteControl::changeSpeed);
-    disconnect(this, &Core::doCurrentTrackMarks, _remoteControl, &RemoteControl::updateTrackMarks);
-    disconnect(this, &Core::doListen, _remoteControl, &RemoteControl::listen);
+    ASSERT(disconnect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doRcConnected, this, &Core::doRcConnected));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doRcDisconnected, this, &Core::doRcDisconnected));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doTrainingPcConnected, this, &Core::doTrainingPcConnected));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doTrainingPcDisconnected, this, &Core::doTrainingPcDisconnected));
 }
 
 void Core::connectVideoControlSignals()
@@ -528,17 +505,18 @@ Core::Core(QObject* parent)
 
     connectCoreSignals();
 
+    _rcThread = new QThread(this);
+    _rcThread->setObjectName("remoteControlThread");
+    _remoteControl = new RemoteControl();
+    ASSERT(connect(_rcThread, &QThread::started, _remoteControl, &RemoteControl::start));
+    ASSERT(connect(_rcThread, &QThread::finished, this, &Core::onRemoteControlFinished));
+
+    connectRemoteControlSignals();
+    _remoteControl->moveToThread(_rcThread);
+    _rcThread->start();
+
+
     if (_deviceType == Avicon31Estonia) {
-        _rcThread = new QThread(this);
-        _rcThread->setObjectName("remoteControlThread");
-        _remoteControl = new RemoteControl();
-        ASSERT(connect(_rcThread, &QThread::started, _remoteControl, &RemoteControl::start));
-        ASSERT(connect(_rcThread, &QThread::finished, this, &Core::onRemoteControlFinished));
-
-        connectRemoteControlSignals();
-        _remoteControl->moveToThread(_rcThread);
-        _rcThread->start();
-
         _videoControllerThread = new QThread(this);
         _videoControllerThread->setObjectName("videoControllerThread");
 
@@ -611,18 +589,18 @@ void Core::finit()
     Q_ASSERT(_defcoreThread);
 
     disconnectCoreSignals();
+    disConnectRemoteControlSignals();
+    if (_rcThread != nullptr) {
+        _rcThread->quit();
+        _rcThread->wait(8000);
+        if (_rcThread->isRunning()) {
+            _rcThread->terminate();
+            _rcThread->wait(8000);
+        }
+    }
     if (_deviceType == Avicon31Estonia) {
-        disConnectRemoteControlSignals();
         disConnectVideoControlSignals();
 
-        if (_rcThread != nullptr) {
-            _rcThread->quit();
-            _rcThread->wait(8000);
-            if (_rcThread->isRunning()) {
-                _rcThread->terminate();
-                _rcThread->wait(8000);
-            }
-        }
 
         if (_videoControllerThread != nullptr) {
             emit stopVideoController();
@@ -1742,7 +1720,6 @@ int Core::openFile(QString& dir, QString& fileName)
     _filename = fileName;
     dir += fileName;
     resetCurrentTrackMark();
-    disconnect(_remoteControl, &RemoteControl::doCurrentTrackMark, this, &Core::onCurrentTrackMark);
     disconnect(_defcore, &Defcore::doBScan2Data, this, &Core::doBScan2Data);
     registration().stop(false);
     registration().start();
@@ -1766,7 +1743,6 @@ void Core::closeFile()
 {
     resetCurrentTrackMark();
     resetCurrentTapeModel();
-    connect(_remoteControl, &RemoteControl::doCurrentTrackMark, this, &Core::onCurrentTrackMark);
     connect(_defcore, &Defcore::doBScan2Data, this, &Core::doBScan2Data);
     _filename = "";
     registration().closeFile();

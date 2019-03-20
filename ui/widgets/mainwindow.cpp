@@ -426,12 +426,10 @@ void MainWindow::init()
     emit messageChanged("");
     emit progressChanged(96);
 
-    if (_deviceType == Avicon31Estonia) {
-        connectRemoteControlSignals();
-        core.listenRemoteControl();
-    }
+    connectRemoteControlSignals();
+    core.listenRemoteControl();
 
-    core.initTemperatureManager();
+    //    core.initTemperatureManager();
     core.start();
 
     emit progressChanged(100);
@@ -439,12 +437,19 @@ void MainWindow::init()
 #if defined TARGET_AVICON31
     move(-72, 0);
     core.setCurrentDirection(_registrationPage->getDirection());
-    showFullScreen();
+
 #elif defined TARGET_AVICONDB
     showFullScreen();
 #else
     showMaximized();
 #endif
+
+#ifdef ANDROID
+    showFullScreen();
+#else
+    show();
+#endif
+
     ASSERT(connect(&core, &Core::permissionsChanged, this, &MainWindow::onAccessLevelChanged));
     ASSERT(connect(_permissionsPage, &PermissionsPage::configurePasswordsPressed, this, &MainWindow::onConfigurePasswordsPagePressed));
     onAccessLevelChanged();
@@ -2726,6 +2731,12 @@ void MainWindow::connectRemoteControlSignals()
     ASSERT(connect(core, &Core::doSatellitesInUse, this, &MainWindow::onSatellitesInUse));
     ASSERT(connect(core, &Core::doSatellitesInfo, this, &MainWindow::onSatellitesInfo));
 
+    ASSERT(connect(core, &Core::doRcConnected, this, &MainWindow::rcConnected));
+    ASSERT(connect(core, &Core::doRcDisconnected, this, &MainWindow::rcDisconnected));
+    ASSERT(connect(core, &Core::doTrainingPcConnected, this, &MainWindow::trainingPcConnected));
+    ASSERT(connect(core, &Core::doTrainingPcDisconnected, this, &MainWindow::trainingPcDisconnected));
+
+
     // Remote control transitions
     ASSERT(_registrationOffState->addTransition(core, &Core::doStartRegistration, _registrationOnState));
     ASSERT(_registrationOnState->addTransition(core, &Core::doStopRegistration, _registrationOffState));
@@ -2847,6 +2858,26 @@ void MainWindow::lateralButtonClicked()
     else if (!ui->handLateralPanelView->isVisible() && ui->leftScanLateralPanelView->isVisible() && ui->rightScanLateralPanelView->isVisible()) {
         setScanChannel(index, lateralSide);
     }
+}
+
+void MainWindow::rcConnected()
+{
+    ui->rcConnectionLabel->setStyleSheet("background-color: green");
+}
+
+void MainWindow::rcDisconnected()
+{
+    ui->rcConnectionLabel->setStyleSheet("background-color: red");
+}
+
+void MainWindow::trainingPcConnected()
+{
+    ui->trainingPcConnectionLabel->setStyleSheet("background-color: green");
+}
+
+void MainWindow::trainingPcDisconnected()
+{
+    ui->trainingPcConnectionLabel->setStyleSheet("background-color: red");
 }
 
 void MainWindow::changeStateAcousticContact(bool isEnabled)

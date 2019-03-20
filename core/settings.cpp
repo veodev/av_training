@@ -1632,3 +1632,39 @@ bool restoreParallelVideoBrowsingStatus()
     QSettings settings;
     return settings.value("ParallelVideoBrowsingStatus", false).toBool();
 }
+
+void saveRcTcpServerPort(quint16 port)
+{
+    QSettings settings;
+    settings.setValue("RcTcpServerPort", port);
+}
+
+quint16 restoreRcTcpServerPort()
+{
+    QSettings settings;
+    return static_cast<quint16>(settings.value("RcTcpServerPort", 49001).toInt());
+}
+
+void saveTrainingPcTcpServerPort(quint16 port)
+{
+    QSettings settings;
+    settings.setValue("TrainingPcTcpServerPort", port);
+}
+
+quint16 restoreTrainingPcTcpServerPort()
+{
+    QSettings settings;
+    return static_cast<quint16>(settings.value("TrainingPcTcpServerPort", 50003).toInt());
+}
+
+void saveTrainingPcTcpServerIpAddress(QString ipAddress)
+{
+    QSettings settings;
+    settings.setValue("TrainingPcTcpServerIpAddress", ipAddress);
+}
+
+QString restoreTrainingPcTcpServerIpAddress()
+{
+    QSettings settings;
+    return settings.value("TrainingPcTcpServerIpAddress", "127.0.0.1").toString();
+}

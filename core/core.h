@@ -292,6 +292,12 @@ signals:
     void doStopTempSensorManager();
 
     // Remote control signals
+    void doRcConnected();
+    void doRcDisconnected();
+    void doTrainingPcConnected();
+    void doTrainingPcDisconnected();
+
+
     void doRemoteControlConnected();
     void doRemoteControlDisconnected();
     void doSendMeter(int meter);

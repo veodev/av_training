@@ -202,6 +202,11 @@ private:
     void setupLateralButtons();
     void lateralButtonClicked();
 
+    void rcConnected();
+    void rcDisconnected();
+    void trainingPcConnected();
+    void trainingPcDisconnected();
+
 private slots:
     void switchToPage(QWidget* widget);
     void switchToMenuPage(QWidget* widget);

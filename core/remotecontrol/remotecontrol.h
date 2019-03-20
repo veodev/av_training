@@ -3,66 +3,68 @@
 
 #include <QObject>
 #include <QTcpSocket>
-#include <QDataStream>
+#include <QTcpServer>
 #include <QTimer>
-
-#include "coredefinitions.h"
-
-class QTcpServer;
-class QTcpSocket;
-class QGeoPositionInfo;
+#include "enums.h"
 
 class RemoteControl : public QObject
 {
     Q_OBJECT
 public:
-    explicit RemoteControl(QObject *parent = nullptr);
+    explicit RemoteControl(QObject* parent = nullptr);
     void start();
+    void listen();
 
 signals:
     void doRemoteControlConnected();
     void doRemoteControlDisconnected();
     void doRemoteControlPingFail();
-    void doStartRegistration();
-    void doStopRegistration();
-    void doUpdateRemoteState();
-    void doCurrentTrackMark(int km, int pk);
-    void doSatellitesInUse(int countSatellites);
-    void doSatellitesInfo(const QGeoPositionInfo& info);
-    void doTextLabel(QString& textlabel);
-    void doStartSwitchLabel();
-    void doEndSwitchLabel();
+    void doTrackMarks();
 
-public slots:
-    void sendMeter(int m);
-    void updateRemoteState(bool isRegOn, ViewCoordinate viewType, Direction direction, int km, int pk, int m);
-    void updateTrackMarks(int km, int pk, int m);
-    void updateRemoteMarks();
-    void changeSpeed(double value);
-    void listen();
-
-private slots:
-    void onNewConnection();
-    void onCloseConnection();
-    void onReadyRead();
-    void onPingSendTimerTimeout();
-    void onWatchdogTimeout();
-
-private:    
-    void sendStringList(RemoteControlHeaders header, QStringList& list);
-    void sendMessage(QByteArray& message);
-    void readMessageFromBuffer();
+    void doRcConnected();
+    void doRcDisconnected();
+    void doTrainingPcConnected();
+    void doTrainingPcDisconnected();
 
 private:
-    QTcpServer* _tcpServer;
-    QTcpSocket* _tcpSocket;
-    QStringList _bridgesList;
-    QStringList _platformsList;
-    QStringList _miscList;
-    QByteArray _messagesBuffer;
-    bool _isRegistrationStarted;
-    QTimer* _pingTimer;
-    QTimer* _watchdog;
+    void rcTcpServerNewConnection();
+    void rcTcpSocketReadyRead();
+    void rcTcpSocketDisconnected();
+
+    void connectTrainingPc();
+    void disconnectTrainingPc();
+
+    void trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState state);
+    void trainingPcTcpSocketReadyRead();
+
+    void rcWatchdogTimeout();
+    void rcPingTimerTimeout();
+    void trainingPcWatchdogTimeout();
+    void trainingPcPingTimerTimeout();
+
+    void sendMessageToTrainingPc(TrainingEnums::MessageId messageId, QByteArray data = QByteArray());
+    void sendMessageToRc(TrainingEnums::MessageId messageId, QByteArray data = QByteArray());
+
+    void parseTrainingPcMessages();
+    void parseRcMessages();
+
+private:
+    QTcpServer* _rcTcpServer;
+    QTcpSocket* _rcTcpSocket;
+    QTcpSocket* _trainingPcTcpSocket;
+
+    QByteArray _rcMessagesBuffer;
+    QByteArray _trainingPcMessagesBuffer;
+
+    QTimer* _rcPingTimer;
+    QTimer* _trainingPcPingTimer;
+
+    QTimer* _rcWatchdog;
+    QTimer* _trainingPcWatchdog;
+
+    QString _trainingPcIpAddress;
+    quint16 _trainingPcPort;
+    quint16 _rcPort;
 };
 
-#endif // REMOTECONTROL_H
+#endif  // REMOTECONTROL_H
