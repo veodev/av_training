@@ -1666,5 +1666,5 @@ void saveTrainingPcTcpServerIpAddress(QString ipAddress)
 QString restoreTrainingPcTcpServerIpAddress()
 {
     QSettings settings;
-    return settings.value("TrainingPcTcpServerIpAddress", "127.0.0.1").toString();
+    return settings.value("TrainingPcTcpServerIpAddress", "192.168.100.1").toString();
 }

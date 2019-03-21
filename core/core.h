@@ -11,6 +11,7 @@
 #include "modeltypes.h"
 #include "coredefinitions.h"
 #include "Definitions.h"
+#include "enums.h"
 
 #include <set>
 #include <vector>
@@ -210,6 +211,15 @@ public slots:
     void onEndSwitchLabel();
     void onTextLabel(QString& textLabel);
 
+    void registrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, TrackMarks* trackMarks);
+    void registrationOff();
+    void setCurrentTrackMarks(int km, int pk);
+    void setRailroadSwitch(int number);
+    void setDefect(QString defectCode, TrainingEnums::RailroadSide side);
+    void boltJointOn();
+    void boltJointOff();
+    void setCduMode(TrainingEnums::CduMode mode);
+
 signals:
     void doAScanMeas(QSharedPointer<tDEV_AScanMeasure>);
     void doAScanData(QSharedPointer<tDEV_AScanHead>, QSharedPointer<tUMU_AScanData>);
@@ -296,6 +306,19 @@ signals:
     void doRcDisconnected();
     void doTrainingPcConnected();
     void doTrainingPcDisconnected();
+    void doBoltJointButtonPressed();
+    void doBoltJointButtonReleased();
+    void doTrackMarksButtonReleased();
+    void doServiceMarksButtonReleased();
+
+    void doRegistrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, int km, int pk, int m);
+    void doRegistrationOff();
+    void doSetCurrentTrackMarks(int km, int pk);
+    void doSetRailroadSwitch(int number);
+    void doSetDefect(QString defectCode, TrainingEnums::RailroadSide side);
+    void doBoltJointOn();
+    void doBoltJointOff();
+    void doSetCduMode(TrainingEnums::CduMode mode);
 
 
     void doRemoteControlConnected();

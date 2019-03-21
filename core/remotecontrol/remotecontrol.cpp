@@ -50,6 +50,80 @@ void RemoteControl::listen()
     connectTrainingPc();
 }
 
+void RemoteControl::registrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, int km, int pk, int m)
+{
+    QByteArray data;
+    data.append(char(operatorName.length()));
+    data.append(convertQStringToUtf16ByteArray(operatorName));
+    data.append(char(railroadPathName.length()));
+    data.append(convertQStringToUtf16ByteArray(railroadPathName));
+    data.append(char(pathNumber));
+    data.append(char(direction));
+    data.append(char(km));
+    data.append(char(pk));
+    data.append(char(m));
+    sendMessageToTrainingPc(TrainingEnums::MessageId::RegistrationOnId, data);
+
+    qDebug() << data.toHex(' ');
+}
+
+void RemoteControl::registrationOff()
+{
+    sendMessageToTrainingPc(TrainingEnums::MessageId::RegistrationOffId);
+}
+
+void RemoteControl::setCurrentTrackMarks(int km, int pk)
+{
+    QByteArray data;
+    data.append(char(km));
+    data.append(char(pk));
+    sendMessageToTrainingPc(TrainingEnums::MessageId::OperatorTrackCoordinateId, data);
+}
+
+void RemoteControl::setRailroadSwitch(int number)
+{
+    QByteArray data;
+    data.append(char(number));
+    sendMessageToTrainingPc(TrainingEnums::MessageId::RailroadSwitchMarkId, data);
+}
+
+void RemoteControl::setDefect(QString defectCode, TrainingEnums::RailroadSide side)
+{
+    QByteArray data;
+    data.append(char(defectCode.length()));
+    data.append(convertQStringToUtf16ByteArray(defectCode));
+    data.append(char(side));
+    sendMessageToTrainingPc(TrainingEnums::MessageId::DefectMarkId, data);
+}
+
+void RemoteControl::boltJointOn()
+{
+    sendMessageToTrainingPc(TrainingEnums::MessageId::BoltJointOnId);
+}
+
+void RemoteControl::boltJointOff()
+{
+    sendMessageToTrainingPc(TrainingEnums::MessageId::BoltJointOffId);
+}
+
+void RemoteControl::setCduMode(TrainingEnums::CduMode mode)
+{
+    QByteArray data;
+    data.append(char(mode));
+    sendMessageToTrainingPc(TrainingEnums::MessageId::ChangeCduModeId, data);
+    qDebug() << data.toHex(' ');
+}
+
+QByteArray RemoteControl::convertQStringToUtf16ByteArray(QString str)
+{
+    QByteArray utf16ByteArray;
+    for (auto ch : str) {
+        ushort code = ch.unicode();
+        utf16ByteArray.append(reinterpret_cast<char*>(&code), sizeof(ushort));
+    }
+    return utf16ByteArray;
+}
+
 void RemoteControl::rcTcpServerNewConnection()
 {
     if (_rcTcpSocket != nullptr) {
@@ -64,6 +138,7 @@ void RemoteControl::rcTcpServerNewConnection()
     connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
     emit doRcConnected();
     _rcPingTimer->start();
+    qDebug() << "rcTcpServerNewConnection";
 }
 
 void RemoteControl::rcTcpSocketDisconnected()
@@ -72,10 +147,12 @@ void RemoteControl::rcTcpSocketDisconnected()
     _rcTcpSocket->deleteLater();
     _rcTcpSocket = nullptr;
     emit doRcDisconnected();
+    qDebug() << "rcTcpSocketDisconnected";
 }
 
 void RemoteControl::connectTrainingPc()
 {
+    qDebug() << "connectTrainingPc";
     if (_trainingPcTcpSocket == nullptr) {
         _trainingPcTcpSocket = new QTcpSocket(this);
         connect(_trainingPcTcpSocket, &QTcpSocket::stateChanged, this, &RemoteControl::trainingPcTcpSocketStateChanged);
@@ -99,7 +176,8 @@ void RemoteControl::trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState
 {
     switch (state) {
     case QAbstractSocket::UnconnectedState:
-        emit doRcDisconnected();
+        emit doTrainingPcDisconnected();
+        qDebug() << "QAbstractSocket::UnconnectedState";
         disconnectTrainingPc();
         QTimer::singleShot(3000, this, &RemoteControl::connectTrainingPc);
         break;
@@ -125,6 +203,7 @@ void RemoteControl::rcWatchdogTimeout()
 {
     _rcPingTimer->stop();
     emit doRcDisconnected();
+    qDebug() << "rcWatchdogTimeout";
 }
 
 void RemoteControl::rcPingTimerTimeout()
@@ -213,6 +292,16 @@ void RemoteControl::parseRcMessages()
                 case TrainingEnums::MessageId::PingId:
                     _rcWatchdog->start();
                     break;
+                case TrainingEnums::MessageId::BoltJointOnId:
+                    emit doBoltJointButtonPressed();
+                    break;
+                case TrainingEnums::MessageId::BoltJointOffId:
+                    emit doBoltJointButtonReleased();
+                    break;
+                case TrainingEnums::MessageId::ChangeCduModeId:
+                    changeCduMode(static_cast<TrainingEnums::CduMode>(_rcMessagesBuffer.at(0)));
+                    _rcMessagesBuffer.remove(0, 1);
+                    break;
                 default:
                     break;
                 }
@@ -224,6 +313,20 @@ void RemoteControl::parseRcMessages()
         else {
             break;
         }
+    }
+}
+
+void RemoteControl::changeCduMode(TrainingEnums::CduMode mode)
+{
+    switch (mode) {
+    case TrainingEnums::CduMode::TrackMarksMode:
+        emit doTrackMarksButtonReleased();
+        break;
+    case TrainingEnums::CduMode::ServiceMarksMode:
+        emit doServiceMarksButtonReleased();
+        break;
+    default:
+        break;
     }
 }
 

@@ -15,6 +15,17 @@ public:
     void start();
     void listen();
 
+    void registrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, int km, int pk, int m);
+    void registrationOff();
+    void setCurrentTrackMarks(int km, int pk);
+    void setRailroadSwitch(int number);
+    void setDefect(QString defectCode, TrainingEnums::RailroadSide side);
+    void boltJointOn();
+    void boltJointOff();
+    void setCduMode(TrainingEnums::CduMode mode);
+
+    QByteArray convertQStringToUtf16ByteArray(QString str);
+
 signals:
     void doRemoteControlConnected();
     void doRemoteControlDisconnected();
@@ -25,6 +36,11 @@ signals:
     void doRcDisconnected();
     void doTrainingPcConnected();
     void doTrainingPcDisconnected();
+
+    void doBoltJointButtonPressed();
+    void doBoltJointButtonReleased();
+    void doTrackMarksButtonReleased();
+    void doServiceMarksButtonReleased();
 
 private:
     void rcTcpServerNewConnection();
@@ -47,6 +63,7 @@ private:
 
     void parseTrainingPcMessages();
     void parseRcMessages();
+    void changeCduMode(TrainingEnums::CduMode mode);
 
 private:
     QTcpServer* _rcTcpServer;

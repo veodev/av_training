@@ -383,6 +383,9 @@ void Registration::addDefectLabel(int length, int depth, int width, const QStrin
 
     qDebug() << "Defect label - " << label;
     _dataContainer->AddDefLabel(static_cast<eDeviceSide>(side), label);
+
+    // training pc
+    Core::instance().setDefect(defectCode, static_cast<TrainingEnums::RailroadSide>(side));
 }
 
 void Registration::addTextLabel(const QString& label, DeviceSide side)
@@ -424,6 +427,11 @@ void Registration::setMrfPost(const TMRussian* trackMarks)
     Post.Pk[0] = trackMarks->getPostPk(0);
     Post.Pk[1] = trackMarks->getPostPk(1);
     _dataContainer->AddMRFPost(Post);
+
+    // training pc
+    int km = static_cast<const TMRussian*>(trackMarks)->getKm();
+    int pk = static_cast<const TMRussian*>(trackMarks)->getPk();
+    Core::instance().setCurrentTrackMarks(km, pk);
 }
 
 void Registration::setCaPost(const TMMetric1KM* trackMarks)

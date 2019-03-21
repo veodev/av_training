@@ -390,20 +390,46 @@ void Core::disconnectCoreSignals()
 
 void Core::connectRemoteControlSignals()
 {
-    ASSERT(connect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
     ASSERT(connect(_remoteControl, &RemoteControl::doRcConnected, this, &Core::doRcConnected));
     ASSERT(connect(_remoteControl, &RemoteControl::doRcDisconnected, this, &Core::doRcDisconnected));
     ASSERT(connect(_remoteControl, &RemoteControl::doTrainingPcConnected, this, &Core::doTrainingPcConnected));
     ASSERT(connect(_remoteControl, &RemoteControl::doTrainingPcDisconnected, this, &Core::doTrainingPcDisconnected));
+    ASSERT(connect(_remoteControl, &RemoteControl::doBoltJointButtonPressed, this, &Core::doBoltJointButtonPressed));
+    ASSERT(connect(_remoteControl, &RemoteControl::doBoltJointButtonReleased, this, &Core::doBoltJointButtonReleased));
+    ASSERT(connect(_remoteControl, &RemoteControl::doTrackMarksButtonReleased, this, &Core::doTrackMarksButtonReleased));
+    ASSERT(connect(_remoteControl, &RemoteControl::doServiceMarksButtonReleased, this, &Core::doServiceMarksButtonReleased));
+
+    ASSERT(connect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
+    ASSERT(connect(this, &Core::doRegistrationOn, _remoteControl, &RemoteControl::registrationOn));
+    ASSERT(connect(this, &Core::doRegistrationOff, _remoteControl, &RemoteControl::registrationOff));
+    ASSERT(connect(this, &Core::doSetCurrentTrackMarks, _remoteControl, &RemoteControl::setCurrentTrackMarks));
+    ASSERT(connect(this, &Core::doSetRailroadSwitch, _remoteControl, &RemoteControl::setRailroadSwitch));
+    ASSERT(connect(this, &Core::doSetDefect, _remoteControl, &RemoteControl::setDefect));
+    ASSERT(connect(this, &Core::doBoltJointOn, _remoteControl, &RemoteControl::boltJointOn));
+    ASSERT(connect(this, &Core::doBoltJointOff, _remoteControl, &RemoteControl::boltJointOff));
+    ASSERT(connect(this, &Core::doSetCduMode, _remoteControl, &RemoteControl::setCduMode));
 }
 
 void Core::disConnectRemoteControlSignals()
 {
-    ASSERT(disconnect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
     ASSERT(disconnect(_remoteControl, &RemoteControl::doRcConnected, this, &Core::doRcConnected));
     ASSERT(disconnect(_remoteControl, &RemoteControl::doRcDisconnected, this, &Core::doRcDisconnected));
     ASSERT(disconnect(_remoteControl, &RemoteControl::doTrainingPcConnected, this, &Core::doTrainingPcConnected));
     ASSERT(disconnect(_remoteControl, &RemoteControl::doTrainingPcDisconnected, this, &Core::doTrainingPcDisconnected));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doBoltJointButtonPressed, this, &Core::doBoltJointButtonPressed));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doBoltJointButtonReleased, this, &Core::doBoltJointButtonReleased));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doTrackMarksButtonReleased, this, &Core::doTrackMarksButtonReleased));
+    ASSERT(disconnect(_remoteControl, &RemoteControl::doServiceMarksButtonReleased, this, &Core::doServiceMarksButtonReleased));
+
+    ASSERT(disconnect(this, &Core::doListen, _remoteControl, &RemoteControl::listen));
+    ASSERT(disconnect(this, &Core::doRegistrationOn, _remoteControl, &RemoteControl::registrationOn));
+    ASSERT(disconnect(this, &Core::doRegistrationOff, _remoteControl, &RemoteControl::registrationOff));
+    ASSERT(disconnect(this, &Core::doSetCurrentTrackMarks, _remoteControl, &RemoteControl::setCurrentTrackMarks));
+    ASSERT(disconnect(this, &Core::doSetRailroadSwitch, _remoteControl, &RemoteControl::setRailroadSwitch));
+    ASSERT(disconnect(this, &Core::doSetDefect, _remoteControl, &RemoteControl::setDefect));
+    ASSERT(disconnect(this, &Core::doBoltJointOn, _remoteControl, &RemoteControl::boltJointOn));
+    ASSERT(disconnect(this, &Core::doBoltJointOff, _remoteControl, &RemoteControl::boltJointOff));
+    ASSERT(disconnect(this, &Core::doSetCduMode, _remoteControl, &RemoteControl::setCduMode));
 }
 
 void Core::connectVideoControlSignals()
@@ -485,6 +511,9 @@ Core::Core(QObject* parent)
     qRegisterMetaType<Direction>("Direction");
     qRegisterMetaType<ViewCoordinate>("ViewCoordinate");
     qRegisterMetaType<QGeoPositionInfo>("QGeoPositionInfo");
+    qRegisterMetaType<TrainingEnums::Direction>("TrainingEnums::Direction");
+    qRegisterMetaType<TrainingEnums::CduMode>("TrainingEnums::CduMode");
+    qRegisterMetaType<TrainingEnums::RailroadSide>("TrainingEnums::RailroadSide");
 
     _acNotifyStates[0] = false;
     _acNotifyStates[1] = false;
@@ -1398,6 +1427,49 @@ void Core::onEndSwitchLabel()
 void Core::onTextLabel(QString& textLabel)
 {
     _registration->addTextLabel(textLabel);
+}
+
+void Core::registrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, TrackMarks* trackMarks)
+{
+    int km = static_cast<TMRussian*>(trackMarks)->getKm();
+    int pk = static_cast<TMRussian*>(trackMarks)->getPk();
+    int m = static_cast<TMRussian*>(trackMarks)->getM();
+    emit doRegistrationOn(operatorName, railroadPathName, pathNumber, direction, km, pk, m);
+}
+
+void Core::registrationOff()
+{
+    emit doRegistrationOff();
+}
+
+void Core::setCurrentTrackMarks(int km, int pk)
+{
+    emit doSetCurrentTrackMarks(km, pk);
+}
+
+void Core::setRailroadSwitch(int number)
+{
+    emit doSetRailroadSwitch(number);
+}
+
+void Core::setDefect(QString defectCode, TrainingEnums::RailroadSide side)
+{
+    emit doSetDefect(defectCode, side);
+}
+
+void Core::boltJointOn()
+{
+    emit doBoltJointOn();
+}
+
+void Core::boltJointOff()
+{
+    emit doBoltJointOff();
+}
+
+void Core::setCduMode(TrainingEnums::CduMode mode)
+{
+    emit doSetCduMode(mode);
 }
 
 void Core::calibrationType2()

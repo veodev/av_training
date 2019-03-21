@@ -643,6 +643,9 @@ void MainWindow::addSwitchNumber()
     if (switchNumber.isEmpty() == false) {
         Core::instance().registration().addTextLabel(tr("Switch number #%1").arg(switchNumber));
     }
+
+    // training pc
+    Core::instance().setRailroadSwitch(switchNumber.toInt());
 }
 
 void MainWindow::addBranch()
@@ -2730,16 +2733,20 @@ void MainWindow::connectRemoteControlSignals()
     ASSERT(connect(this, &MainWindow::trackMarksSelected, core, &Core::onTrackMarksSelected));
     ASSERT(connect(core, &Core::doSatellitesInUse, this, &MainWindow::onSatellitesInUse));
     ASSERT(connect(core, &Core::doSatellitesInfo, this, &MainWindow::onSatellitesInfo));
+    // Remote control transitions
+    ASSERT(_registrationOffState->addTransition(core, &Core::doStartRegistration, _registrationOnState));
+    ASSERT(_registrationOnState->addTransition(core, &Core::doStopRegistration, _registrationOffState));
+
 
     ASSERT(connect(core, &Core::doRcConnected, this, &MainWindow::rcConnected));
     ASSERT(connect(core, &Core::doRcDisconnected, this, &MainWindow::rcDisconnected));
     ASSERT(connect(core, &Core::doTrainingPcConnected, this, &MainWindow::trainingPcConnected));
     ASSERT(connect(core, &Core::doTrainingPcDisconnected, this, &MainWindow::trainingPcDisconnected));
 
-
-    // Remote control transitions
-    ASSERT(_registrationOffState->addTransition(core, &Core::doStartRegistration, _registrationOnState));
-    ASSERT(_registrationOnState->addTransition(core, &Core::doStopRegistration, _registrationOffState));
+    ASSERT(connect(core, &Core::doBoltJointButtonPressed, this, &MainWindow::doStartBoltJoint));
+    ASSERT(connect(core, &Core::doBoltJointButtonReleased, this, &MainWindow::doStopBoltJoint));
+    ASSERT(connect(core, &Core::doTrackMarksButtonReleased, this, &MainWindow::trackMarkExternalKeyboard_released));
+    ASSERT(connect(core, &Core::doServiceMarksButtonReleased, this, &MainWindow::serviceMarkExternalKeyboard_released));
 }
 
 void MainWindow::disconnectRemoteControlSignals()
@@ -2753,6 +2760,17 @@ void MainWindow::disconnectRemoteControlSignals()
     disconnect(core, &Core::doTmSelectedFromRemoteControl, this, &MainWindow::onTmSelectedFromRemoteControl);
     disconnect(ui->encoderPage, &EncoderPage::changedSpeed, core, &Core::doChangedSpeed);
     disconnect(this, &MainWindow::trackMarksSelected, core, &Core::onTrackMarksSelected);
+
+
+    ASSERT(disconnect(core, &Core::doRcConnected, this, &MainWindow::rcConnected));
+    ASSERT(disconnect(core, &Core::doRcDisconnected, this, &MainWindow::rcDisconnected));
+    ASSERT(disconnect(core, &Core::doTrainingPcConnected, this, &MainWindow::trainingPcConnected));
+    ASSERT(disconnect(core, &Core::doTrainingPcDisconnected, this, &MainWindow::trainingPcDisconnected));
+
+    ASSERT(disconnect(core, &Core::doBoltJointButtonPressed, this, &MainWindow::doStartBoltJoint));
+    ASSERT(disconnect(core, &Core::doBoltJointButtonReleased, this, &MainWindow::doStopBoltJoint));
+    ASSERT(disconnect(core, &Core::doTrackMarksButtonReleased, this, &MainWindow::trackMarkExternalKeyboard_released));
+    ASSERT(disconnect(core, &Core::doServiceMarksButtonReleased, this, &MainWindow::serviceMarkExternalKeyboard_released));
 }
 
 void MainWindow::viewCurrentCoordinate()
@@ -3774,6 +3792,11 @@ void MainWindow::onRegistrationOnStateEntered()
     if (_registrationType == EKASUIRegistration) {
         Core::instance().getEkasui()->resetIncidentIndex();
     }
+
+    // training pc
+    TrainingEnums::Direction direction;
+    direction = _registrationPage->getDirection() == 1 ? TrainingEnums::Direction::IncreaseDirection : TrainingEnums::Direction::DecreaseDirection;
+    core.registrationOn(_registrationPage->getOperator(), _registrationPage->getLine(), _registrationPage->getTrackNumber().toInt(), direction, core.getTrackMarks());
 }
 
 void MainWindow::onRegistrationOnStateExited()
@@ -3803,6 +3826,7 @@ void MainWindow::onRegistrationOnStateExited()
 #if defined TARGET_AVICON31
     disconnect(&(core.registration()), &Registration::doStopRegistration, this, &MainWindow::onReport);
 #endif
+    core.registrationOff();
 }
 
 void MainWindow::onRegistrationOnServiceStateEntered()
@@ -3871,6 +3895,9 @@ void MainWindow::onStartBoltJointStateEntered()
     ui->boltJointLine->show();
     Core::instance().startBoltJoint(static_cast<int>(restoreAdditiveForSens()));
     ui->aScanPage->blockControlsArea(true);
+
+    // training pc
+    Core::instance().boltJointOn();
 }
 
 void MainWindow::onStopBoltJointStateEntered()
@@ -3879,6 +3906,9 @@ void MainWindow::onStopBoltJointStateEntered()
     ui->boltJointLine->hide();
     Core::instance().stopBoltJoint();
     ui->aScanPage->blockControlsArea(false);
+
+    // training pc
+    Core::instance().boltJointOff();
 }
 
 void MainWindow::onMenuStateRegOffEntered()
@@ -3941,6 +3971,9 @@ void MainWindow::onCalibrationScanControlStateRegOffEntered()
 
     ui->leftScanLateralPanelView->select(0);
     switchToPage(ui->aScanPage);
+
+    // training pc
+    Core::instance().setCduMode(TrainingEnums::CduMode::CalibrationMode);
 }
 
 void MainWindow::onCalibrationHandControlStateRegOffEntered()
@@ -4213,6 +4246,9 @@ void MainWindow::onBScanStateRegOnEntered()
     }
     setEnabledBoltJointState(true);
     hideStackedLayout();
+
+    // training pc
+    Core::instance().setCduMode(TrainingEnums::CduMode::BScanMode);
 }
 
 void MainWindow::onBScanStateRegOnExited()
@@ -4274,6 +4310,9 @@ void MainWindow::onEvaluationStateRegOnEntered()
     Core::instance().registration().addEvaluationMode();
     setEnabledBoltJointState(true);
     switchToPage(ui->aScanPage);
+
+    // training pc
+    Core::instance().setCduMode(TrainingEnums::CduMode::EvaluationMode);
 }
 
 void MainWindow::onEvaluationStateRegOnExited()
@@ -4314,6 +4353,9 @@ void MainWindow::onHandStateRegOnEntered()
     }
     hideStackedLayout();
     setEnabledBoltJointState(false);
+
+    // training pc
+    core.setCduMode(TrainingEnums::CduMode::HandMode);
 }
 
 void MainWindow::onHandStateRegOnExited()
@@ -4460,6 +4502,9 @@ void MainWindow::onPauseStateRegOnEntered()
     _waitMessagePage->setClicked(true);
     _waitMessagePage->setText(tr("Pause"));
     _waitMessagePage->show();
+
+    // training pc
+    core.setCduMode(TrainingEnums::CduMode::PauseMode);
 }
 
 void MainWindow::onPauseStateRegOnExited()
