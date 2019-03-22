@@ -63,8 +63,6 @@ void RemoteControl::registrationOn(QString operatorName, QString railroadPathNam
     data.append(char(pk));
     data.append(char(m));
     sendMessageToTrainingPc(TrainingEnums::MessageId::RegistrationOnId, data);
-
-    qDebug() << data.toHex(' ');
 }
 
 void RemoteControl::registrationOff()
@@ -111,7 +109,6 @@ void RemoteControl::setCduMode(TrainingEnums::CduMode mode)
     QByteArray data;
     data.append(char(mode));
     sendMessageToTrainingPc(TrainingEnums::MessageId::ChangeCduModeId, data);
-    qDebug() << data.toHex(' ');
 }
 
 QByteArray RemoteControl::convertQStringToUtf16ByteArray(QString str)
@@ -138,7 +135,6 @@ void RemoteControl::rcTcpServerNewConnection()
     connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
     emit doRcConnected();
     _rcPingTimer->start();
-    qDebug() << "rcTcpServerNewConnection";
 }
 
 void RemoteControl::rcTcpSocketDisconnected()
@@ -147,12 +143,10 @@ void RemoteControl::rcTcpSocketDisconnected()
     _rcTcpSocket->deleteLater();
     _rcTcpSocket = nullptr;
     emit doRcDisconnected();
-    qDebug() << "rcTcpSocketDisconnected";
 }
 
 void RemoteControl::connectTrainingPc()
 {
-    qDebug() << "connectTrainingPc";
     if (_trainingPcTcpSocket == nullptr) {
         _trainingPcTcpSocket = new QTcpSocket(this);
         connect(_trainingPcTcpSocket, &QTcpSocket::stateChanged, this, &RemoteControl::trainingPcTcpSocketStateChanged);
@@ -177,7 +171,6 @@ void RemoteControl::trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState
     switch (state) {
     case QAbstractSocket::UnconnectedState:
         emit doTrainingPcDisconnected();
-        qDebug() << "QAbstractSocket::UnconnectedState";
         disconnectTrainingPc();
         QTimer::singleShot(3000, this, &RemoteControl::connectTrainingPc);
         break;
@@ -203,7 +196,6 @@ void RemoteControl::rcWatchdogTimeout()
 {
     _rcPingTimer->stop();
     emit doRcDisconnected();
-    qDebug() << "rcWatchdogTimeout";
 }
 
 void RemoteControl::rcPingTimerTimeout()

@@ -2467,7 +2467,7 @@
                  <number>0</number>
                 </property>
                 <property name="currentIndex">
-                 <number>43</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="infoPage">
                  <layout class="QVBoxLayout" name="verticalLayout_6">
