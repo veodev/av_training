@@ -53,9 +53,9 @@ void RemoteControl::listen()
 void RemoteControl::registrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, int km, int pk, int m)
 {
     QByteArray data;
-    data.append(char(operatorName.length()));
+    data.append(char(operatorName.length() * 2));
     data.append(convertQStringToUtf16ByteArray(operatorName));
-    data.append(char(railroadPathName.length()));
+    data.append(char(railroadPathName.length() * 2));
     data.append(convertQStringToUtf16ByteArray(railroadPathName));
     data.append(char(pathNumber));
     data.append(char(direction));
@@ -88,7 +88,7 @@ void RemoteControl::setRailroadSwitch(int number)
 void RemoteControl::setDefect(QString defectCode, TrainingEnums::RailroadSide side)
 {
     QByteArray data;
-    data.append(char(defectCode.length()));
+    data.append(char(defectCode.length() * 2));
     data.append(convertQStringToUtf16ByteArray(defectCode));
     data.append(char(side));
     sendMessageToTrainingPc(TrainingEnums::MessageId::DefectMarkId, data);
