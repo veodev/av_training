@@ -3,6 +3,7 @@
 
 CustomQLabel::CustomQLabel(QWidget* parent, Qt::WindowFlags f)
     : QLabel(parent)
+    , _isBlock(false)
 {
 }
 
@@ -24,8 +25,15 @@ int CustomQLabel::getSide()
     return _side;
 }
 
+void CustomQLabel::blockControl(bool isBlock)
+{
+    _isBlock = isBlock;
+}
+
 void CustomQLabel::mousePressEvent(QMouseEvent* me)
 {
     Q_UNUSED(me);
-    emit clicked();
+    if (!_isBlock) {
+        emit clicked();
+    }
 }

@@ -16,6 +16,7 @@ public:
     void setIndexAndSide(int index, int side);
     int getIndex();
     int getSide();
+    void blockControl(bool isBlock);
 
 signals:
     void clicked();
@@ -25,6 +26,7 @@ protected:
 
     int _index;
     int _side;
+    bool _isBlock;
 };
 
 #endif  // CUSTOMQLABEL_H

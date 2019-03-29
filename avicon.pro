@@ -1,12 +1,10 @@
 QT += core gui widgets sensors multimedia positioning
-QT += svg xml sql bluetooth
+QT += svg xml sql bluetooth quickwidgets
 
 #For using ccache install package in your operating system.
 #QMAKE_CXX=ccache g++
 
 TEMPLATE = app
-
-
 
 #TARGET = avicon31
 
@@ -33,35 +31,6 @@ avicon31 {
         target.path = /usr/local/avicon-31
         INSTALLS += target
     }
-} else:avicondbhs {
-    message("avicondbhs")
-    TARGET = avicondbhs
-    DEFINES += TARGET_AVICONDBHS
-#    CONFIG += c++11
-    linux-g++-32 {
-        DEFINES += ATOM_DEVICE
-        target.path = /usr/local/avicon-dbhs
-        INSTALLS += target
-    }
-} else:avicondb {
-    message("avicondb")
-    TARGET = avicondb
-    DEFINES += TARGET_AVICONDB
-#    CONFIG += c++11
-    linux-g++-32 {
-        DEFINES += ATOM_DEVICE
-        target.path = /usr/local/avicon-db
-        INSTALLS += target
-    }
-} else:avicon15 {
-    message("avicon15")
-    TARGET = avicon15
-    DEFINES += TARGET_AVICON15
-#    CONFIG += c++11
-} else:avicon31e {
-    TARGET = avicon31e
-    DEFINES += TARGET_AVICON31E
-    message("avicon31e")
 } else {
     error("Unknown target")
 }
@@ -104,11 +73,6 @@ release {
 }
 
 include(./version.pri)
-
-simulation {
-    message("simulation")
-    DEFINES += SIMULATION
-}
 
 message("CONFIG:"$$CONFIG)
 clang {
@@ -170,7 +134,7 @@ message("QWT_INCLUDE_PATH:" $$QWT_INC_PATH)
 
 # geoposition
 
-avicon15 | avicon31{
+avicon31{
     android {
     message("GEOPOSITION ANDROID")
     INCLUDEPATH += \
@@ -185,15 +149,15 @@ avicon15 | avicon31{
     }
 }
 
-avicon15 | avicondb {
-    linux-g++ | linux-g++-32 {
-    message("GEOPOSITION FAKE")
-    INCLUDEPATH += \
-        core/geoposition/fake
-    HEADERS += core/geoposition/fake/geoposition.h
-    SOURCES += core/geoposition/fake/geoposition.cpp
-    }
-}
+#avicon15 | avicondb {
+#    linux-g++ | linux-g++-32 {
+#    message("GEOPOSITION FAKE")
+#    INCLUDEPATH += \
+#        core/geoposition/fake
+#    HEADERS += core/geoposition/fake/geoposition.h
+#    SOURCES += core/geoposition/fake/geoposition.cpp
+#    }
+#}
 
 avicon31 {
     linux-buildroot-g++ | linux-imx51-g++ | linux-g++ | linux-g++-32 {
@@ -217,20 +181,20 @@ avicon31 {
     }
 }
 
-# imx51 board specific features
-avicon31:linux-buildroot-g++ | linux-imx51-g++ {
-    message("BLUETOOTH QT")
-    SOURCES += \
-        core/externalkeyboard/externalkeyboard.cpp \
-        core/screen/brightness_utsvu.cpp \
-        core/screen/screen_utsvu.cpp \
-        core/bluetooth/bluetoothmanagerqt.cpp
-    HEADERS += \
-        core/bluetooth/bluetoothmanagerqt.h
-    message("USE ALSA!")
-}
+## imx51 board specific features
+#avicon31:linux-buildroot-g++ | linux-imx51-g++ {
+#    message("BLUETOOTH QT")
+#    SOURCES += \
+#        core/externalkeyboard/externalkeyboard.cpp \
+#        core/screen/brightness_utsvu.cpp \
+#        core/screen/screen_utsvu.cpp \
+#        core/bluetooth/bluetoothmanagerqt.cpp
+#    HEADERS += \
+#        core/bluetooth/bluetoothmanagerqt.h
+#    message("USE ALSA!")
+#}
 
-if (avicon15 || avicon31) {
+if (avicon31) {
     if (android-g++) {
         message("BLUETOOTH ANDROID")
         HEADERS += \
@@ -242,13 +206,13 @@ if (avicon15 || avicon31) {
     }
 }
 
-avicon31:win32 {
-    SOURCES += \
-        core/externalkeyboard/externalkeyboardfake.cpp \
-        core/screen/brightness_fake.cpp \
-        core/screen/screen_fake.cpp
-}
-avicon31:linux-g++-32 {
+#avicon31:win32 {
+#    SOURCES += \
+#        core/externalkeyboard/externalkeyboardfake.cpp \
+#        core/screen/brightness_fake.cpp \
+#        core/screen/screen_fake.cpp
+#}
+avicon31:linux-g++ {
     message("BLUETOOTH FAKE")
     SOURCES += \
         core/externalkeyboard/externalkeyboardfake.cpp \
@@ -259,66 +223,26 @@ avicon31:linux-g++-32 {
         core/bluetooth/fakebluetoothmanager.h
 }
 
-avicondbhs | avicondb | avicon31 {
-    linux-g++-32 | linux-g++ {
-        message("BRIGHTNESS ADVANTECH")
-        message("BLUETOOTH FAKE")
-        SOURCES += \
-            core/externalkeyboard/externalkeyboardfake.cpp \
-            core/screen/brightness_advantech.cpp \
-            core/screen/screen_fake.cpp \
-            core/bluetooth/fakebluetoothmanager.cpp
-        HEADERS += \
-            core/bluetooth/fakebluetoothmanager.h
-    }
-}
+#avicondbhs | avicondb | avicon31 {
+#    linux-g++-32 | linux-g++ {
+#        message("BRIGHTNESS ADVANTECH")
+#        message("BLUETOOTH FAKE")
+#        SOURCES += \
+#            core/externalkeyboard/externalkeyboardfake.cpp \
+#            core/screen/brightness_advantech.cpp \
+#            core/screen/screen_fake.cpp \
+#            core/bluetooth/fakebluetoothmanager.cpp
+#        HEADERS += \
+#            core/bluetooth/fakebluetoothmanager.h
+#    }
+#}
 
-clang {
-    SOURCES += \
-        core/externalkeyboard/externalkeyboardfake.cpp \
-        core/screen/brightness_fake.cpp \
-        core/screen/screen_fake.cpp \
-        core/bluetooth/bluetoothmanagerqt.cpp
-    HEADERS += \
-        core/bluetooth/bluetoothmanagerqt.h
-}
-avicon15 | avicon31:android {
+avicon31:android {
     message("EXTERNAL KEYBOARD & BRIGHTNESS & SCREEN FAKE")
     SOURCES += \
         core/externalkeyboard/externalkeyboardfake.cpp \
         core/screen/brightness_fake.cpp \
         core/screen/screen_fake.cpp
-}
-avicon31e:win32 {
-    SOURCES += \
-        core/externalkeyboard/externalkeyboardfake.cpp \
-        core/screen/brightness_fake.cpp \
-        core/screen/screen_fake.cpp
-}
-# Av31 on Win
-avicon31:win32 {
-INCLUDEPATH += defcore/av11
-SOURCES += \
-    defcore/prot_umu/prot_umu_usbcan_win.cpp \
-    defcore/datatransfers/datatransfer_usbcan_win.cpp \
-    defcore/sockets/socket_usbcan_win.cpp
-HEADERS += \
-    defcore/prot_umu/prot_umu_usbcan_win.h \
-    defcore/datatransfers/datatransfer_usbcan_win.h \
-    defcore/sockets/socket_usbcan_win.h \
-    defcore/av11/av11_21.h
-}
-avicon31e:win32 {
-INCLUDEPATH += defcore/av11
-SOURCES += \
-    defcore/prot_umu/prot_umu_usbcan_win.cpp \
-    defcore/datatransfers/datatransfer_usbcan_win.cpp \
-    defcore/sockets/socket_usbcan_win.cpp
-HEADERS += \
-    defcore/prot_umu/prot_umu_usbcan_win.h \
-    defcore/datatransfers/datatransfer_usbcan_win.h \
-    defcore/sockets/socket_usbcan_win.h \
-    defcore/av11/av11_21.h
 }
 
 # Avicon17 Rail Head Scanner
@@ -329,17 +253,23 @@ SOURCES += \
     ui/widgets/av17/av17page.cpp \
     ui/widgets/av17/av17plot.cpp \
     ui/widgets/av17/DataFileUnit.cpp \
-    ui/widgets/av17/av17projections.cpp
+    ui/widgets/av17/av17projections.cpp \
+    ui/widgets/loadingpage.cpp \
+    ui/widgets/netsettingpage.cpp
 HEADERS += \
     core/enums.h \
     ui/widgets/av17/av17defview.h \
     ui/widgets/av17/av17page.h \
     ui/widgets/av17/av17plot.h \
     ui/widgets/av17/DataFileUnit.h \
-    ui/widgets/av17/av17projections.h
+    ui/widgets/av17/av17projections.h \
+    ui/widgets/loadingpage.h \
+    ui/widgets/netsettingpage.h
 FORMS += \
     ui/widgets/av17/av17defview.ui \
-    ui/widgets/av17/av17page.ui
+    ui/widgets/av17/av17page.ui \
+    ui/widgets/loadingpage.ui \
+    ui/widgets/netsettingpage.ui
 
 # powermanagement
 INCLUDEPATH += core/powermanagement
@@ -454,15 +384,6 @@ else {
     SOURCES += ui/widgets/video/videoplayer/videoplayerpage.cpp
     FORMS += ui/widgets/video/videoplayer/videoplayerpage.ui
 }
-#QT += multimediawidgets
-#INCLUDEPATH += \
-#    ui/widgets/video/videoplayer
-#HEADERS += \
-#    ui/widgets/video/videoplayer/videoplayerpage.h
-#SOURCES += \
-#    ui/widgets/video/videoplayer/videoplayerpage.cpp
-#FORMS += \
-#    ui/widgets/video/videoplayer/videoplayerpage.ui
 
 # GPIO
 INCLUDEPATH += core/gpio
@@ -501,7 +422,7 @@ else {
     FORMS +=   ui/widgets/wifi/fake/wifimanagerpage.ui
 }
 
-if (avicon15 | avicon31:android) {
+if (avicon31:android) {
     message("WIFI FOR ANDROID")
     INCLUDEPATH -= \
         core/wifimanager \
@@ -978,41 +899,6 @@ FORMS += \
 # defcore
 INCLUDEPATH += defcore defcore/datacontainer
 
-avicon15 {
-    SOURCES += \
-        defcore/DeviceConfig_Av15_usbcan.cpp \
-        defcore/sockets/socket_can_fake.cpp
-    HEADERS += \
-        defcore/DeviceConfig_Av15_usbcan.h
-}
-
-#avicon15 | avicon31:android {
-#    message("avicon15_for_android")
-#    SOURCES += \
-#        defcore/sockets/socket_usbcan_and.cpp \
-#        defcore/datatransfers/datatransfer_usbcan_and.cpp
-#    HEADERS += \
-#        defcore/sockets/socket_usbcan_and.h \
-#        defcore/datatransfers/datatransfer_usbcan_and.h
-#}
-
-avicondbhs {
-    SOURCES += \
-        defcore/DeviceConfig_DB_can.cpp \
-        defcore/sockets/socket_can.cpp
-    HEADERS += \
-        defcore/DeviceConfig_DB_can.h \
-        defcore/sockets/socket_can.h
-}
-
-avicondb {
-SOURCES += \
-        defcore/DeviceConfig_DB_lan.cpp \
-        defcore/sockets/socket_can_fake.cpp
-    HEADERS += \
-        defcore/DeviceConfig_DB_lan.h
-}
-
 avicon31 {
     SOURCES += \
         defcore/DeviceConfig_Avk31.cpp \
@@ -1021,14 +907,6 @@ avicon31 {
     HEADERS += \
         defcore/DeviceConfig_Avk31.h \
         defcore/DeviceConfig_HeadScan.h
-}
-
-avicon31e {
-    SOURCES += \
-        defcore/DeviceConfig_Avk31E.cpp \
-        defcore/sockets/socket_can_fake.cpp
-    HEADERS += \
-        defcore/DeviceConfig_Avk31E.h
 }
 
 SOURCES += \
@@ -1097,41 +975,20 @@ HEADERS += \
     defcore/ekasui/EK_ASUIdata.h \
     defcore/datacontainer/filereader/FileReader.h
 
-win32 {
-    LIBS += -lws2_32
-}
-
 RESOURCES += \
     ui/resources/resources.qrc \
     ui/widgets/internationalization/internationalization.qrc \
     ui/resources/qml.qrc
 
-avicondb {
-    RESOURCES += ui/resources/schemes_db.qrc
-} else:avicon31 {
+avicon31 {
     RESOURCES += ui/resources/schemes_avicon31.qrc
-} else:avicon15 {
-    message("AVICON15 RESOURCES")
-    RESOURCES += ui/resources/schemes_avicon15.qrc
 }
 
 TRANSLATIONS = \
     ui/widgets/internationalization/russian.ts
 
 android {
-        QT = quick $$QT printsupport concurrent androidextras
-
-#        NEW_BUM_DRIVER_PATH = $$(NAUTIZ_BUM_DRIVER_PATH)
-#        DEVICE_TARGET = Android
-#        INCLUDEPATH += $$NEW_BUM_DRIVER_PATH/BumDriver
-#        CONFIG(release, debug|release): BUM_DRIVER_LIB = \
-#                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Release/libBumDriver.a
-#        CONFIG(debug, debug|release): BUM_DRIVER_LIB = \
-#                                $$NEW_BUM_DRIVER_PATH/build-BumDriver-$${DEVICE_TARGET}-Debug/libBumDriver.a
-#        message("BUM_DRIVER_LIB:"$$BUM_DRIVER_LIB)
-#        LIBS += $$BUM_DRIVER_LIB
-#        PRE_TARGETDEPS += $$BUM_DRIVER_LIB
-
+        QT += quick printsupport concurrent androidextras
         DISTFILES += \
             android/AndroidManifest.xml \
             android/gradle/wrapper/gradle-wrapper.jar \
@@ -1143,11 +1000,9 @@ android {
             android/src/com/radioavionica/avicon31/System.java \
             android/src/com/radioavionica/avicon31/WifiAccess.java \
             android/src/com/radioavionica/avicon31/PositionClass.java \
-            android/src/com/radioavionica/avicon31/BluetoothClass.java
+            android/src/com/radioavionica/avicon31/BluetoothClass.java \
+            android/src/com/radioavionica/avicon31/CameraClass.java
 
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
         OTHER_FILES += android/src/com/mycompanyname/myappname/System.java
 }
-
-DISTFILES += \
-    android/src/com/radioavionica/avicon31/CameraClass.java

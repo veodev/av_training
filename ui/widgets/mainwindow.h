@@ -59,6 +59,7 @@ class OptionsListPage;
 class QPushButton;
 class SwitchTypePage;
 class SplashScreen;
+class LoadingPage;
 
 
 class MainWindow : public QMainWindow
@@ -206,6 +207,8 @@ private:
     void rcDisconnected();
     void trainingPcConnected();
     void trainingPcDisconnected();
+
+    void blockUi(bool isBlock);
 
 private slots:
     void switchToPage(QWidget* widget);
@@ -545,6 +548,7 @@ private:
     PermissionsPage* _permissionsPage;
     PasswordManagerPage* _passwordManagerPage;
     ScannerDefectRegistrationPage* _scannerDefectRegistrationPage;
+    LoadingPage* _loadingPage;
     SwitchOperatorWidget* _switchOperatorWidget;
 
     QStateMachine* _stateMachine;

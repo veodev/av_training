@@ -56,6 +56,7 @@
 #include "limitsforsens.h"
 #include "ekasui/EK_ASUIdata.h"
 #include "testexternalkeyboardwidget.h"
+#include "loadingpage.h"
 
 #ifdef ANDROID
 #include <QtAndroid>
@@ -133,6 +134,7 @@ MainWindow::MainWindow(QWidget* parent)
     , _permissionsPage(nullptr)
     , _passwordManagerPage(nullptr)
     , _scannerDefectRegistrationPage(nullptr)
+    , _loadingPage(nullptr)
     , _switchOperatorWidget(nullptr)
     , _stateMachine(nullptr)
     , _connectionState(nullptr)
@@ -264,6 +266,7 @@ MainWindow::~MainWindow()
     delete _report;
     delete _waitMessagePage;
     delete _quickBar;
+    delete _loadingPage;
 
     delete ui;
 
@@ -1462,6 +1465,10 @@ void MainWindow::setupStackedWidget()
     ui->stackedWidget->addWidget(_notificationOptions);
     _memoryImportPage = new MemoryImportPage();
     ui->stackedWidget->addWidget(_memoryImportPage);
+    _loadingPage = new LoadingPage();
+    _stackedLayout->addWidget(_loadingPage);
+    _stackedLayout->setCurrentWidget(_loadingPage);
+    _loadingPage->hide();
 }
 
 void MainWindow::setupOptionsListPage()
@@ -2891,11 +2898,59 @@ void MainWindow::rcDisconnected()
 void MainWindow::trainingPcConnected()
 {
     ui->trainingPcConnectionLabel->setStyleSheet("background-color: green");
+    blockUi(false);
 }
 
 void MainWindow::trainingPcDisconnected()
 {
     ui->trainingPcConnectionLabel->setStyleSheet("background-color: red");
+    blockUi(true);
+}
+
+void MainWindow::blockUi(bool isBlock)
+{
+    isBlock ? _loadingPage->show() : _loadingPage->hide();
+
+    ui->handLateralButtonsView->blockButtons(isBlock);
+    ui->handLateralPanelView->blockPanel(isBlock);
+
+    ui->leftScanLateralButtonsView->blockButtons(isBlock);
+    ui->leftScanLateralPanelView->blockButtons(isBlock);
+
+    ui->rightScanLateralButtonsView->blockButtons(isBlock);
+    ui->rightScanLateralPanelView->blockButtons(isBlock);
+
+    ui->backCustomButton->setEnabled(isBlock);
+    ui->menuCustomButton->setDisabled(isBlock);
+    ui->boltJointCustomButton->setDisabled(isBlock);
+    ui->marksCustomButton->setDisabled(isBlock);
+    ui->railTypeCustomButton->setDisabled(isBlock);
+    ui->handCustomButton->setDisabled(isBlock);
+    ui->pauseCustomButton->setDisabled(isBlock);
+    ui->searchCustomButton->setDisabled(isBlock);
+    ui->optionsCustomButton->setDisabled(isBlock);
+
+    ui->leftLateralButton0->blockControl(isBlock);
+    ui->leftLateralButton1->blockControl(isBlock);
+    ui->leftLateralButton2->blockControl(isBlock);
+    ui->leftLateralButton3->blockControl(isBlock);
+    ui->leftLateralButton4->blockControl(isBlock);
+    ui->leftLateralButton5->blockControl(isBlock);
+    ui->leftLateralButton6->blockControl(isBlock);
+    ui->leftLateralButton7->blockControl(isBlock);
+    ui->leftLateralButton8->blockControl(isBlock);
+    ui->leftLateralButton9->blockControl(isBlock);
+
+    ui->rightLateralButton0->blockControl(isBlock);
+    ui->rightLateralButton1->blockControl(isBlock);
+    ui->rightLateralButton2->blockControl(isBlock);
+    ui->rightLateralButton3->blockControl(isBlock);
+    ui->rightLateralButton4->blockControl(isBlock);
+    ui->rightLateralButton5->blockControl(isBlock);
+    ui->rightLateralButton6->blockControl(isBlock);
+    ui->rightLateralButton7->blockControl(isBlock);
+    ui->rightLateralButton8->blockControl(isBlock);
+    ui->rightLateralButton9->blockControl(isBlock);
 }
 
 void MainWindow::changeStateAcousticContact(bool isEnabled)

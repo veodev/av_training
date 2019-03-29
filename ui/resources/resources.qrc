@@ -81,5 +81,6 @@
         <file>images/pause.png</file>
         <file>images/search.png</file>
         <file>images/options.png</file>
+        <file>loadingPage.qml</file>
     </qresource>
 </RCC>
