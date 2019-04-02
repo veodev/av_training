@@ -191,6 +191,7 @@ MainWindow::MainWindow(QWidget* parent)
     , _timerElTest(nullptr)
     , _typeView(static_cast<ViewCoordinate>(restoreTypeViewCoordinateForBScan()))
     , _value(false)
+    , _isIncreaseTracks(restoreIncreaseTracks())
 {
     qRegisterMetaType<eInspectionMethod>("eInspectionMethod");
 }
@@ -1404,6 +1405,7 @@ void MainWindow::setupStackedWidget()
     ui->stackedWidget->addWidget(_boltJointOptions);
     ASSERT(connect(_boltJointOptions, &BoltJointOptions::increaseTracks, ui->bScanPage, &BScanPage::setIncreaseTracks));
     ASSERT(connect(_boltJointOptions, &BoltJointOptions::additiveSensChanged, ui->bScanPage, &BScanPage::setAdditiveForSens));
+    ASSERT(connect(_boltJointOptions, &BoltJointOptions::increaseTracks, this, &MainWindow::setIncreaseTracks));
     emit progressChanged(48);
     _ekasuiOptions = new EKASUIOptions();
     ui->stackedWidget->addWidget(_ekasuiOptions);
@@ -2881,6 +2883,28 @@ void MainWindow::lateralButtonClicked()
         setHandChannel(index);
     }
     else if (!ui->handLateralPanelView->isVisible() && ui->leftScanLateralPanelView->isVisible() && ui->rightScanLateralPanelView->isVisible()) {
+        if (_isIncreaseTracks && ui->boltJointLabel->isVisible()) {
+            switch (index) {
+            case 0:
+            case 1:
+                index = 3;
+                break;
+            case 3:
+            case 4:
+                index = 4;
+                break;
+            case 5:
+            case 6:
+                index = 8;
+                break;
+            case 8:
+            case 9:
+                index = 9;
+                break;
+            default:
+                break;
+            }
+        }
         setScanChannel(index, lateralSide);
     }
 }
@@ -2951,6 +2975,11 @@ void MainWindow::blockUi(bool isBlock)
     ui->rightLateralButton7->blockControl(isBlock);
     ui->rightLateralButton8->blockControl(isBlock);
     ui->rightLateralButton9->blockControl(isBlock);
+}
+
+void MainWindow::setIncreaseTracks(bool isIncrease)
+{
+    _isIncreaseTracks = isIncrease;
 }
 
 void MainWindow::changeStateAcousticContact(bool isEnabled)

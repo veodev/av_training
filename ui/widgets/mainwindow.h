@@ -209,6 +209,7 @@ private:
     void trainingPcDisconnected();
 
     void blockUi(bool isBlock);
+    void setIncreaseTracks(bool isIncrease);
 
 private slots:
     void switchToPage(QWidget* widget);
@@ -635,6 +636,8 @@ private:
     QTimer* _timerElTest;
     ViewCoordinate _typeView;
     SplashScreen* _splashScreen;
+
+    bool _isIncreaseTracks;
 };
 
 #endif  // MAINWINDOW_H
