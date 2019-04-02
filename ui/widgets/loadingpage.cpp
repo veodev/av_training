@@ -14,6 +14,7 @@ LoadingPage::LoadingPage(QWidget* parent)
 
 LoadingPage::~LoadingPage()
 {
+    delete _netSettingsPage;
     delete ui;
 }
 
