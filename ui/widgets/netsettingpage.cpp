@@ -1,6 +1,7 @@
 #include "netsettingpage.h"
 #include "ui_netsettingpage.h"
 #include "settings.h"
+#include "core.h"
 
 NetSettingPage::NetSettingPage(QWidget* parent)
     : QWidget(parent)
@@ -23,5 +24,5 @@ void NetSettingPage::on_backButton_released()
     saveTrainingPcTcpServerPort(static_cast<quint16>(ui->trainingPcPortLineEdit->text().toInt()));
     saveRcTcpServerPort(static_cast<quint16>(ui->cduPortLineEdit->text().toInt()));
     hide();
-    emit doNetSettingsChanged();
+    Core::instance().netSettingsChanged();
 }

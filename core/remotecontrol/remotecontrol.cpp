@@ -111,6 +111,20 @@ void RemoteControl::setCduMode(TrainingEnums::CduMode mode)
     sendMessageToTrainingPc(TrainingEnums::MessageId::ChangeCduModeId, data);
 }
 
+void RemoteControl::netSettingsChanged()
+{
+    disconnectRcTcpSocket();
+    disconnectTrainingPc();
+    _rcTcpServer->close();
+    qDebug() << "Remote control server stopped";
+
+    _rcPort = restoreRcTcpServerPort();
+    _trainingPcIpAddress = restoreTrainingPcTcpServerIpAddress();
+    _trainingPcPort = restoreTrainingPcTcpServerPort();
+
+    listen();
+}
+
 QByteArray RemoteControl::convertQStringToUtf16ByteArray(QString str)
 {
     QByteArray utf16ByteArray;
@@ -123,6 +137,16 @@ QByteArray RemoteControl::convertQStringToUtf16ByteArray(QString str)
 
 void RemoteControl::rcTcpServerNewConnection()
 {
+    disconnectRcTcpSocket();
+    _rcTcpSocket = _rcTcpServer->nextPendingConnection();
+    connect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
+    connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
+    emit doRcConnected();
+    _rcPingTimer->start();
+}
+
+void RemoteControl::disconnectRcTcpSocket()
+{
     if (_rcTcpSocket != nullptr) {
         disconnect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
         disconnect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
@@ -130,11 +154,6 @@ void RemoteControl::rcTcpServerNewConnection()
         _rcTcpSocket->deleteLater();
         _rcTcpSocket = nullptr;
     }
-    _rcTcpSocket = _rcTcpServer->nextPendingConnection();
-    connect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
-    connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
-    emit doRcConnected();
-    _rcPingTimer->start();
 }
 
 void RemoteControl::rcTcpSocketDisconnected()

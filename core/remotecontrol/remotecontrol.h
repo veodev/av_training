@@ -23,6 +23,7 @@ public:
     void boltJointOn();
     void boltJointOff();
     void setCduMode(TrainingEnums::CduMode mode);
+    void netSettingsChanged();
 
     QByteArray convertQStringToUtf16ByteArray(QString str);
 
@@ -44,6 +45,7 @@ signals:
 
 private:
     void rcTcpServerNewConnection();
+    void disconnectRcTcpSocket();
     void rcTcpSocketReadyRead();
     void rcTcpSocketDisconnected();
 

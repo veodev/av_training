@@ -219,6 +219,7 @@ public slots:
     void boltJointOn();
     void boltJointOff();
     void setCduMode(TrainingEnums::CduMode mode);
+    void netSettingsChanged();
 
 signals:
     void doAScanMeas(QSharedPointer<tDEV_AScanMeasure>);
@@ -310,6 +311,7 @@ signals:
     void doBoltJointButtonReleased();
     void doTrackMarksButtonReleased();
     void doServiceMarksButtonReleased();
+    void doNetSettingsChanged();
 
     void doRegistrationOn(QString operatorName, QString railroadPathName, int pathNumber, TrainingEnums::Direction direction, int km, int pk, int m);
     void doRegistrationOff();
