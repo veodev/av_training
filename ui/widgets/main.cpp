@@ -94,13 +94,13 @@ int main(int argc, char* argv[])
     qApp->setOverrideCursor(QCursor(Qt::BlankCursor));
 #endif
 
-#if !defined TARGET_AVICON15
+#if defined TARGET_AVICON31
+    LanguageSwitcher::switchLanguage(QString("Russian"));
+#else
     QString language = restoreLanguage();
     if (language.isEmpty() == false) {
         LanguageSwitcher::switchLanguage(language);
     }
-#else
-    LanguageSwitcher::switchLanguage(QString("Russian"));
 #endif
     setStyleSheets();
 

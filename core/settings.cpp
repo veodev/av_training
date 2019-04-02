@@ -1227,7 +1227,7 @@ void saveDeviceType(int devtype)
 int restoreDeviceType()
 {
     QSettings settings;
-    return settings.value("DeviceType", -1).toInt();
+    return settings.value("DeviceType", 0).toInt();
 }
 
 void saveRegistrationType(int regtype)

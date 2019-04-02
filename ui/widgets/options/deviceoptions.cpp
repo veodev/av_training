@@ -29,13 +29,13 @@ void DeviceOptions::on_saveButton_released()
     case Avicon31Default:
         saveLanguage(QString("Russian"));
         saveACVoiceNotificationEnabled(false);
-        saveHeadScannerUseState(true);
-        saveHeadScannerPageState(true);
+        saveHeadScannerUseState(false);
+        saveHeadScannerPageState(false);
         saveRegistrationType(DefaultRegistration);
         saveAutoSensResetEnabled(false);
         saveFiltrationEnable(true);
         saveStateCheckCalibrationAlgorithm(true);
-        saveImportantAreaIndicateEnable(false);        
+        saveImportantAreaIndicateEnable(false);
         saveEkasuiPageState(true);
         saveTypeViewCoordinateForBScan(KmPkM);
         break;
@@ -48,7 +48,7 @@ void DeviceOptions::on_saveButton_released()
         saveAutoSensResetEnabled(true);
         saveFiltrationEnable(true);
         saveStateCheckCalibrationAlgorithm(true);
-        saveImportantAreaIndicateEnable(false);        
+        saveImportantAreaIndicateEnable(false);
         saveEkasuiPageState(false);
         saveTypeViewCoordinateForBScan(KmPkM);
         break;
@@ -80,7 +80,7 @@ void DeviceOptions::on_saveButton_released()
         saveAutoSensResetEnabled(false);
         saveFiltrationEnable(false);
         saveStateCheckCalibrationAlgorithm(false);
-        saveImportantAreaIndicateEnable(false);        
+        saveImportantAreaIndicateEnable(false);
         saveEkasuiPageState(true);
         saveTypeViewCoordinateForBScan(KmPkM);
         break;
@@ -93,7 +93,7 @@ void DeviceOptions::on_saveButton_released()
         saveAutoSensResetEnabled(true);
         saveFiltrationEnable(true);
         saveStateCheckCalibrationAlgorithm(false);
-        saveImportantAreaIndicateEnable(false);        
+        saveImportantAreaIndicateEnable(false);
         saveEkasuiPageState(false);
         saveInternalTempSensorType(0);
         saveExternalTempSensorType(0);
