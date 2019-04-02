@@ -2944,7 +2944,7 @@ void MainWindow::blockUi(bool isBlock)
     ui->rightScanLateralButtonsView->blockButtons(isBlock);
     ui->rightScanLateralPanelView->blockButtons(isBlock);
 
-    ui->backCustomButton->setEnabled(isBlock);
+    ui->backCustomButton->setDisabled(isBlock);
     ui->menuCustomButton->setDisabled(isBlock);
     ui->boltJointCustomButton->setDisabled(isBlock);
     ui->marksCustomButton->setDisabled(isBlock);
