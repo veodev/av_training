@@ -30,3 +30,13 @@ int getAvailableExternalMemoryPercentJNI()
 {
     return QAndroidJniObject::callStaticMethod<jint>("com/radioavionica/avicon31/System", "getAvailableExternalMemoryPercent", "()I");
 }
+
+unsigned long long getTotalBytes()
+{
+    return QAndroidJniObject::callStaticMethod<jlong>("com/radioavionica/avicon31/System", "getTotalExternalMemorySize", "()J");
+}
+
+unsigned long long getAvailableBytes()
+{
+    return QAndroidJniObject::callStaticMethod<jlong>("com/radioavionica/avicon31/System", "getAvailableExternalMemorySize", "()J");
+}

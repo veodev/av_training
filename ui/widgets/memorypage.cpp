@@ -732,15 +732,28 @@ unsigned long long MemoryPage::getUserDirectorySize()
 
 void MemoryPage::checkAvailableMemory()
 {
-#if defined TARGET_AVICON15 && defined ANDROID
+    unsigned long long totalBytes = 0;
+    unsigned long long availableBytes = 0;
+    unsigned long long usedBytes = 0;
+    unsigned long long userKBytes = 0;
+#if defined TARGET_AVICON31 && defined ANDROID
     int availableMemory = getAvailableExternalMemoryPercentJNI();
     if (availableMemory < 0) return;
+    totalBytes = getTotalBytes();
+    availableBytes = getAvailableBytes();
+    usedBytes = totalBytes - availableBytes;
+    userKBytes = usedBytes;
+    qWarning() << "Total bytes: " << convertBytesToView(totalBytes);
+    qWarning() << "Available bytes: " << convertBytesToView(availableBytes);
+    qWarning() << "Used bytes: " << convertBytesToView(usedBytes);
+
+    emit doMemoryInfo(totalBytes / 1024, userKBytes / 1024, 0);
 #else
     _storage.refresh();
-    unsigned long long totalBytes = _storage.bytesTotal();
-    unsigned long long availableBytes = _storage.bytesAvailable();
-    unsigned long long usedBytes = totalBytes - availableBytes;
-    unsigned long long userKBytes = getUserDirectorySize();
+    totalBytes = _storage.bytesTotal();
+    availableBytes = _storage.bytesAvailable();
+    usedBytes = totalBytes - availableBytes;
+    userKBytes = getUserDirectorySize();
     emit doMemoryInfo(totalBytes / 1024, userKBytes, (usedBytes / 1024) - userKBytes);
     int availableMemory = qRound((availableBytes / static_cast<double>(totalBytes)) * 100.0);
 #endif
