@@ -737,17 +737,13 @@ void MemoryPage::checkAvailableMemory()
     unsigned long long usedBytes = 0;
     unsigned long long userKBytes = 0;
 #if defined TARGET_AVICON31 && defined ANDROID
+    Q_UNUSED(userKBytes);
     int availableMemory = getAvailableExternalMemoryPercentJNI();
     if (availableMemory < 0) return;
     totalBytes = getTotalBytes();
     availableBytes = getAvailableBytes();
     usedBytes = totalBytes - availableBytes;
-    userKBytes = usedBytes;
-    qWarning() << "Total bytes: " << convertBytesToView(totalBytes);
-    qWarning() << "Available bytes: " << convertBytesToView(availableBytes);
-    qWarning() << "Used bytes: " << convertBytesToView(usedBytes);
-
-    emit doMemoryInfo(totalBytes / 1024, userKBytes / 1024, 0);
+    emit doMemoryInfo(totalBytes / 1024, usedBytes / 1024, 0);
 #else
     _storage.refresh();
     totalBytes = _storage.bytesTotal();
