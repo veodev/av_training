@@ -114,7 +114,6 @@ int main(int argc, char* argv[])
 #endif
     splashScreen->setOrganizationName(organisationName().toUpper());
     splashScreen->setApplicationName(applicationName().toUpper());
-    splashScreen->setApplicationVersion(APP_VERSION);
     splashScreen->showFullScreen();
     splashScreen->changeProgress(5);
     qApp->processEvents();

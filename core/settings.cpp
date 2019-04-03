@@ -36,7 +36,7 @@ QString manufactureName()
 QString applicationName()
 {
 #if defined(TARGET_AVICON31)
-    return QObject::tr("avicon-31");
+    return QObject::tr("testcon");
 #elif defined(TARGET_AVICONDB)
     return QObject::tr("multichannel");
 #elif defined(TARGET_AVICONDBHS)
