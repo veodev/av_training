@@ -488,6 +488,9 @@ void MainWindow::init()
         }
         _electricTestPage->show();
     }
+
+    Notifier::instance().setMinimumHeight(ui->mainPanel->geometry().height());
+    Notifier::instance().setMaximumHeight(ui->mainPanel->geometry().height());
 }
 
 void MainWindow::addNewCalibration()

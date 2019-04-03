@@ -3153,6 +3153,17 @@ mks  </source>
     </message>
 </context>
 <context>
+    <name>LoadingPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>qrc:/loadingPage.qml</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MScanPage</name>
     <message>
         <source>Form</source>
@@ -5003,6 +5014,26 @@ Reconnect!</source>
         <source>Switch number #%1</source>
         <translation>СП №%1</translation>
     </message>
+    <message>
+        <source>RC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TPC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>qrc:/loadingPage.qml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>РАДИОАВИОНИКА</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>АВИКОН-31</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MarksNotificationOptions</name>
@@ -5484,6 +5515,29 @@ Reconnect!</source>
     </message>
 </context>
 <context>
+    <name>NetSettingPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PORT RC SERVER:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP-ADDRESS T_PC (IP:PORT):</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Note</name>
     <message>
         <source>Form</source>
@@ -5930,7 +5984,7 @@ Reconnect!</source>
     </message>
     <message>
         <source>avicon-31</source>
-        <translation>авикон-31</translation>
+        <translation type="vanished">авикон-31</translation>
     </message>
     <message>
         <source> mm</source>
@@ -6209,6 +6263,10 @@ Reconnect!</source>
 </source>
         <translation>Закрыть: 
 </translation>
+    </message>
+    <message>
+        <source>testcon</source>
+        <translation type="unfinished">тесткон</translation>
     </message>
 </context>
 <context>
