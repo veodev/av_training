@@ -2467,7 +2467,7 @@
                  <number>0</number>
                 </property>
                 <property name="currentIndex">
-                 <number>46</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="infoPage">
                  <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -8527,6 +8527,9 @@ border-color: rgba(255, 255, 255, 0);</string>
                   </item>
                   <item>
                    <widget class="QListWidget" name="schemesListWidget">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="palette">
                      <palette>
                       <active>
@@ -8585,6 +8588,9 @@ border-color: rgba(255, 255, 255, 0);</string>
                   </item>
                   <item>
                    <widget class="QPushButton" name="selectSchemePushButton">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>

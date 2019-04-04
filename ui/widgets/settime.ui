@@ -164,7 +164,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="SpinBoxNumber" name="offsetSpinBox" native="true">
+           <widget class="SpinBoxNumber" name="offsetSpinBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -694,6 +694,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="okButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -721,7 +724,7 @@
  <customwidgets>
   <customwidget>
    <class>SpinBoxNumber</class>
-   <extends>QWidget</extends>
+   <extends>QSpinBox</extends>
    <header>spinboxnumber.h</header>
    <container>1</container>
   </customwidget>
