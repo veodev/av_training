@@ -729,7 +729,7 @@ void saveHeadScannerPageState(bool isEnabled)
 bool restoreHeadScannerPageState()
 {
     QSettings settings;
-    return settings.value("headScanPageState", true).toBool();
+    return settings.value("headScanPageState", false).toBool();
 }
 
 void saveEkasuiPageState(bool isEnabled)
