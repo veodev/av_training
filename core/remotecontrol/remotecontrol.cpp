@@ -185,13 +185,18 @@ void RemoteControl::disconnectTrainingPc()
     }
 }
 
+void RemoteControl::reConnectTrainingPc()
+{
+    disconnectTrainingPc();
+    QTimer::singleShot(5000, this, &RemoteControl::connectTrainingPc);
+}
+
 void RemoteControl::trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState state)
 {
     switch (state) {
     case QAbstractSocket::UnconnectedState:
         emit doTrainingPcDisconnected();
-        disconnectTrainingPc();
-        QTimer::singleShot(3000, this, &RemoteControl::connectTrainingPc);
+        reConnectTrainingPc();
         break;
     case QAbstractSocket::ConnectingState:
         break;
@@ -224,8 +229,9 @@ void RemoteControl::rcPingTimerTimeout()
 
 void RemoteControl::trainingPcWatchdogTimeout()
 {
-    _trainingPcPingTimer->stop();
     emit doTrainingPcDisconnected();
+    _trainingPcPingTimer->stop();
+    reConnectTrainingPc();
 }
 
 void RemoteControl::trainingPcPingTimerTimeout()

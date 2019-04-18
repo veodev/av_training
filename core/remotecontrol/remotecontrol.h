@@ -51,6 +51,7 @@ private:
 
     void connectTrainingPc();
     void disconnectTrainingPc();
+    void reConnectTrainingPc();
 
     void trainingPcTcpSocketStateChanged(QAbstractSocket::SocketState state);
     void trainingPcTcpSocketReadyRead();
