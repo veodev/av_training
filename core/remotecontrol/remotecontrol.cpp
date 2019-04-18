@@ -141,8 +141,8 @@ void RemoteControl::rcTcpServerNewConnection()
     _rcTcpSocket = _rcTcpServer->nextPendingConnection();
     connect(_rcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::rcTcpSocketReadyRead);
     connect(_rcTcpSocket, &QTcpSocket::disconnected, this, &RemoteControl::rcTcpSocketDisconnected);
-    emit doRcConnected();
     _rcPingTimer->start();
+    emit doRcConnected();
 }
 
 void RemoteControl::disconnectRcTcpSocket()
@@ -177,6 +177,7 @@ void RemoteControl::connectTrainingPc()
 void RemoteControl::disconnectTrainingPc()
 {
     if (_trainingPcTcpSocket != nullptr) {
+        _trainingPcPingTimer->stop();
         _trainingPcTcpSocket->disconnectFromHost();
         disconnect(_trainingPcTcpSocket, &QTcpSocket::stateChanged, this, &RemoteControl::trainingPcTcpSocketStateChanged);
         disconnect(_trainingPcTcpSocket, &QTcpSocket::readyRead, this, &RemoteControl::trainingPcTcpSocketReadyRead);
@@ -308,6 +309,7 @@ void RemoteControl::parseRcMessages()
                 switch (static_cast<TrainingEnums::MessageId>(header.Id)) {
                 case TrainingEnums::MessageId::PingId:
                     _rcWatchdog->start();
+                    emit doRcConnected();
                     break;
                 case TrainingEnums::MessageId::BoltJointOnId:
                     emit doBoltJointButtonPressed();
