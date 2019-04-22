@@ -17,8 +17,8 @@ Page {
             id: busyIndicator
             x: 280
             y: 195
-            width: 200
-            height: 200
+            width: 300
+            height: 300
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             MouseArea {

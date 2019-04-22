@@ -491,6 +491,7 @@ void MainWindow::init()
 
     Notifier::instance().setMinimumHeight(ui->mainPanel->geometry().height());
     Notifier::instance().setMaximumHeight(ui->mainPanel->geometry().height());
+    blockUi(true);
 }
 
 void MainWindow::addNewCalibration()
