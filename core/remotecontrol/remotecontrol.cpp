@@ -104,6 +104,11 @@ void RemoteControl::boltJointOff()
     sendMessageToTrainingPc(TrainingEnums::MessageId::BoltJointOffId);
 }
 
+void RemoteControl::railType()
+{
+    sendMessageToTrainingPc(TrainingEnums::MessageId::RailTypeId);
+}
+
 void RemoteControl::setCduMode(TrainingEnums::CduMode mode)
 {
     QByteArray data;

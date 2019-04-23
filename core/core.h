@@ -218,6 +218,7 @@ public slots:
     void setDefect(QString defectCode, TrainingEnums::RailroadSide side);
     void boltJointOn();
     void boltJointOff();
+    void railType();
     void setCduMode(TrainingEnums::CduMode mode);
     void netSettingsChanged();
 
@@ -320,6 +321,7 @@ signals:
     void doSetDefect(QString defectCode, TrainingEnums::RailroadSide side);
     void doBoltJointOn();
     void doBoltJointOff();
+    void doRailType();
     void doSetCduMode(TrainingEnums::CduMode mode);
 
 

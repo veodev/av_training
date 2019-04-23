@@ -407,6 +407,7 @@ void Core::connectRemoteControlSignals()
     ASSERT(connect(this, &Core::doSetDefect, _remoteControl, &RemoteControl::setDefect));
     ASSERT(connect(this, &Core::doBoltJointOn, _remoteControl, &RemoteControl::boltJointOn));
     ASSERT(connect(this, &Core::doBoltJointOff, _remoteControl, &RemoteControl::boltJointOff));
+    ASSERT(connect(this, &Core::doRailType, _remoteControl, &RemoteControl::railType));
     ASSERT(connect(this, &Core::doSetCduMode, _remoteControl, &RemoteControl::setCduMode));
     ASSERT(connect(this, &Core::doNetSettingsChanged, _remoteControl, &RemoteControl::netSettingsChanged));
 }
@@ -430,6 +431,7 @@ void Core::disConnectRemoteControlSignals()
     ASSERT(disconnect(this, &Core::doSetDefect, _remoteControl, &RemoteControl::setDefect));
     ASSERT(disconnect(this, &Core::doBoltJointOn, _remoteControl, &RemoteControl::boltJointOn));
     ASSERT(disconnect(this, &Core::doBoltJointOff, _remoteControl, &RemoteControl::boltJointOff));
+    ASSERT(disconnect(this, &Core::doRailType, _remoteControl, &RemoteControl::railType));
     ASSERT(disconnect(this, &Core::doSetCduMode, _remoteControl, &RemoteControl::setCduMode));
     ASSERT(disconnect(this, &Core::doNetSettingsChanged, _remoteControl, &RemoteControl::netSettingsChanged));
 }
@@ -1467,6 +1469,11 @@ void Core::boltJointOn()
 void Core::boltJointOff()
 {
     emit doBoltJointOff();
+}
+
+void Core::railType()
+{
+    emit doRailType();
 }
 
 void Core::setCduMode(TrainingEnums::CduMode mode)

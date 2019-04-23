@@ -3335,6 +3335,7 @@ void MainWindow::on_railTypeButton_released()
     }
     else {
         Core::instance().calibrationToRailType();
+        Core::instance().railType();
     }
 }
 
