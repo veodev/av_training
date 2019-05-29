@@ -491,7 +491,9 @@ void MainWindow::init()
 
     Notifier::instance().setMinimumHeight(ui->mainPanel->geometry().height());
     Notifier::instance().setMaximumHeight(ui->mainPanel->geometry().height());
+#ifndef DEBUG
     blockUi(true);
+#endif
 }
 
 void MainWindow::addNewCalibration()
@@ -2926,13 +2928,17 @@ void MainWindow::rcDisconnected()
 void MainWindow::trainingPcConnected()
 {
     ui->trainingPcConnectionLabel->setStyleSheet("background-color: green");
+#ifndef DEBUG
     blockUi(false);
+#endif
 }
 
 void MainWindow::trainingPcDisconnected()
 {
     ui->trainingPcConnectionLabel->setStyleSheet("background-color: red");
+#ifndef DEBUG
     blockUi(true);
+#endif
 }
 
 void MainWindow::blockUi(bool isBlock)
