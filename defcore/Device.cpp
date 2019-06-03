@@ -3139,7 +3139,7 @@ void cDevice::tickBScanData(unsigned long EventId)
     _currentDeltaCoord = DEV_BScan2Head->Dir[0];
     _displayCoord = DEV_BScan2Head->XDisCrd[0];
 
-    if (_currentDeltaCoord == 0) {
+    if (_currentDeltaCoord >= 0) {
         _alarmSendTick = GetTickCount_();
 
         delete BScan2Data_ptr;
