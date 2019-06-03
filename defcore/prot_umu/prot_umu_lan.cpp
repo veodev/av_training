@@ -404,7 +404,7 @@ void UMU_LAN::parsePathStep(const tLAN_Message& buff, bool containsDisCoord)
 
         // 4.3. Определение сесии данных В-развертки
         if (!_common_state._bscan_session_id.empty()) {
-            _special_state._bscan_buf->BScanSession = _common_state._bscan_session_id.front();
+            _special_state._bscan_buf->BScanSession = _common_state._bscan_session_id.back();
         }
         else {
             _special_state._bscan_buf->BScanSession = -1;
