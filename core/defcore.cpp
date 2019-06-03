@@ -1040,10 +1040,7 @@ void Defcore::onSetUmuLineToCompleteControl()
     _criticalSection->Enter();
     //    Q_ASSERT(_isDeviceStarted);
     if (_isDeviceStarted) {
-        _device->DisableAll();
-        _device->ChangeDeviceConfig(_deviceConfig);
-        _device->SetLeftSideSwitching(toCompleteControl);
-        _device->EnableAll();
+        _device->setUmuToCompleteControl(_deviceConfig, toCompleteControl);
     }
     _criticalSection->Release();
 }

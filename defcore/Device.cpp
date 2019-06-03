@@ -393,6 +393,17 @@ bool cDevice::ChangeDeviceConfig(cDeviceConfig* Config)  // Смена конф�
     return true;
 }
 
+void cDevice::setUmuToCompleteControl(cDeviceConfig* Config, UMULineSwitching state)
+{
+    if (Config == cfg) {
+        return;
+    }
+    DisableAll();
+    ChangeDeviceConfig(Config);
+    SetLeftSideSwitching(state);
+    EnableAll();
+}
+
 void cDevice::StartWork()  // Начало работы
 {
     thlist->Resume(DeviceThreadIndex);

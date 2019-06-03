@@ -274,6 +274,7 @@ public:
     void Update(bool ResetStrokes, bool SetAScanFlag = false);  // Установка изменений параметров
 
     bool ChangeDeviceConfig(cDeviceConfig* Config);  // Смена конфигурации
+    void setUmuToCompleteControl(cDeviceConfig* Config, UMULineSwitching state);
 
     int GetBScanEchoCount(eChannelType ChType, PtUMU_BScanData DataPtr, eDeviceSide Side, CID id);
     PtUMU_BScanSignal GetBScanEchoData(eChannelType ChType, PtUMU_BScanData DataPtr, eDeviceSide Side, CID id, int Index);
