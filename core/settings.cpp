@@ -1654,7 +1654,7 @@ void saveTrainingPcTcpServerPort(quint16 port)
 quint16 restoreTrainingPcTcpServerPort()
 {
     QSettings settings;
-    return static_cast<quint16>(settings.value("TrainingPcTcpServerPort", 50003).toInt());
+    return static_cast<quint16>(settings.value("TrainingPcTcpServerPort", 50001).toInt());
 }
 
 void saveTrainingPcTcpServerIpAddress(QString ipAddress)
@@ -1666,5 +1666,5 @@ void saveTrainingPcTcpServerIpAddress(QString ipAddress)
 QString restoreTrainingPcTcpServerIpAddress()
 {
     QSettings settings;
-    return settings.value("TrainingPcTcpServerIpAddress", "127.0.0.1").toString();
+    return settings.value("TrainingPcTcpServerIpAddress", "192.168.100.3").toString();
 }
