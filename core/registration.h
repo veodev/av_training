@@ -130,12 +130,9 @@ public:
     void modifyRegistrationFileHeader(const QString& operatorName, const QString& pathSectionName, const QString& trackNumber, TrackMarks* trackMarks, bool isReverseSides, bool isDirectionIncrease, int directionCode);
     int openFile(const QString& fileName);
     void closeFile();
-    void distanceCalculate(int &km, int &pk, int &m, int disCoord, int sysCoord, int& direct);
+    void distanceCalculate(int& km, int& pk, int& m, int disCoord, int sysCoord, int& direct);
     void changeLastSpeed(float speed);
-    void delegateSensToModel(int disCoord
-                             , std::vector<std::vector<unsigned char>> &kuSens
-                             , std::vector<std::vector<unsigned char>> &stStrSens
-                             , std::vector<std::vector<unsigned char>> &endStrSens);
+    void delegateSensToModel(int disCoord, std::vector<std::vector<unsigned char>>& kuSens, std::vector<std::vector<unsigned char>>& stStrSens, std::vector<std::vector<unsigned char>>& endStrSens);
     int CIDToChannel(int side, int cid);
     void addStartSwitchControlLabel(const QString& number, SwitchType type, SwitchDirectionType directionType, SwitchFixedDirection fixedDirection, DeviceDirection deviceDirection, eDeviceSide side, QString& switchVariantText);
     void addEndSwitchControlLabel(const QString& number, QString& switchVariantText);
@@ -177,6 +174,7 @@ private:
     bool _isCloseHeader;
     bool _isTemp;
     bool _regarStatus;
+    bool _isDirectionIncrease;
 
 #if defined TARGET_AVICON31 || defined TARGET_AVICON15
     QPointer<GeoPosition> _geoPosition;

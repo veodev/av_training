@@ -43,6 +43,7 @@ Registration::Registration(QObject* parent)
     , _isCheckAcousticContact(restoreStateAcousticContactControl())
     , _isCloseHeader(false)
     , _regarStatus(restoreRegarStatus())
+    , _isDirectionIncrease(true)
 #if defined TARGET_AVICON31 && !defined ANDROID
     , _geoPosition(GeoPosition::instance("/dev/ttymxc1"))
 #elif (defined TARGET_AVICON15 || defined TARGET_AVICON31) && defined ANDROID
@@ -256,6 +257,7 @@ void Registration::start(const QString& operatorName, const QString& pathSection
 #endif
 
     _isCloseHeader = _dataContainer->CloseHeader(isDirectionIncrease ? 1 : -1, (encoderCorrection() * 100));
+    _isDirectionIncrease = isDirectionIncrease;
 
     if (!isService && !makeTestRecordFileName().isEmpty()) {
         _dataContainer->SetTestRecordFile(makeTestRecordFileName());
@@ -385,6 +387,15 @@ void Registration::addDefectLabel(int length, int depth, int width, const QStrin
     _dataContainer->AddDefLabel(static_cast<eDeviceSide>(side), label);
 
     // training pc
+    if (!_isDirectionIncrease) {
+        if (side == DeviceSide::LeftDeviceSide) {
+            side = DeviceSide::RightDeviceSide;
+        }
+        else if (side == DeviceSide::RightDeviceSide) {
+            side = DeviceSide::LeftDeviceSide;
+        }
+    }
+
     Core::instance().setDefect(defectCode, static_cast<TrainingEnums::RailroadSide>(side));
 }
 
